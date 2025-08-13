@@ -20,8 +20,7 @@ public class UsuarioService {
     switch (usuarioDto.getTipo().toLowerCase()) {
       case "aluno":
       Aluno aluno = AlunoMapper.toEntity(usuarioDto);
-        Aluno alunoSalvo = alunoRepository.save(aluno);
-        System.out.println("Aluno salvo com sucesso: " + alunoSalvo.getUsuarioId());
+        alunoRepository.save(aluno);
         return usuarioDto;
     case "professor":
         return usuarioDto; // Implementar lógica para professor
