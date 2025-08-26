@@ -9,8 +9,8 @@ import lombok.*;
 @Entity
 @DiscriminatorValue("ALUNO") 
 public class Aluno extends Usuario {
-  @Column(name = "teste_realizado", nullable = false)
+  @Column(name = "teste_realizado")
   private Boolean testeRealizado;
-  @Column(name = "pontos_ranking", nullable = false)
+  @Column(name = "pontos_ranking")
   private Double pontosRanking;
 }

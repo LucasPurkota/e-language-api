@@ -9,5 +9,6 @@ import lombok.*;
 @Entity
 @DiscriminatorValue("PROFESSOR") 
 public class Professor extends Usuario{
+  @Column(name = "aprovado")
   private Boolean aprovado;
 }
