@@ -3,11 +3,10 @@ package com.tcc.e_language_api.repository;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.tcc.e_language_api.entity.Aluno;
+import com.tcc.e_language_api.entity.Professor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AlunoRepository extends JpaRepository<Aluno, UUID> {
-  
+public interface ProfessorRepository extends JpaRepository<Professor, UUID> {
+
 }

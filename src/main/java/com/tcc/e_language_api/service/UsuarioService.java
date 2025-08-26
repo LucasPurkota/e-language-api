@@ -1,11 +1,10 @@
 package com.tcc.e_language_api.service;
 
+import com.tcc.e_language_api.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import com.tcc.e_language_api.entity.Aluno;
-import com.tcc.e_language_api.repository.AlunoRepository;
-import com.tcc.e_language_api.web.dto.UsuarioDto;
-import com.tcc.e_language_api.web.dto.mapper.AlunoMapper;
+import com.tcc.e_language_api.entity.Usuario;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -13,20 +12,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class UsuarioService {
-  private final AlunoRepository alunoRepository;
 
   @Transactional
-  public UsuarioDto create(UsuarioDto usuarioDto) {
-    switch (usuarioDto.getTipo().toLowerCase()) {
-      case "aluno":
-      Aluno aluno = AlunoMapper.toEntity(usuarioDto);
-        alunoRepository.save(aluno);
-        return usuarioDto;
-    case "professor":
-        return usuarioDto; // Implementar lógica para professor
-    default:
-      throw new IllegalArgumentException("Tipo de usuário inválido: " + usuarioDto.getTipo());
+  public Usuario getByEmail(String email) {
+    try {
+      return UsuarioRepository.findByEmail(email);
+    } catch (Exception e) {
+      throw new RuntimeException("Error fetching Alunos: " + e.getMessage());
     }
-    // return usuarioDto;
   }
 }

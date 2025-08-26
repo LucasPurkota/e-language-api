@@ -15,7 +15,10 @@ public class Endereco {
   @Column(name = "endereco_id", nullable = false, unique = true)
   private UUID enderecoId;
   @ManyToOne
-  @JoinColumn(name = "usuario_id", nullable = false)
+  @JoinColumn(name = "usuario_id", nullable = false, 
+  foreignKey = @ForeignKey(name = "fk_usuario_endereco", 
+  foreignKeyDefinition = "FOREIGN KEY (usuario_id) REFERENCES usuarios (usuario_id) ON DELETE CASCADE ON UPDATE CASCADE"
+))
   private Usuario usuario;
   @Enumerated(EnumType.STRING)
   @Column(name = "tipo", nullable = false)
