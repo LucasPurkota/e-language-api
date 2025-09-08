@@ -5,58 +5,35 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public abstract class UsuarioDto {
+public class UsuarioDto {
   private UUID usuarioId;
   private String nome;
+  @NotBlank
+  @CPF
   private String cpf;
+  @NotBlank
+  @Email(message = "formato do e-mail está invalido", regexp = "^[a-z0-9.+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")
   private String email;
+  @NotBlank
+  @Size(min = 8, message = "Senha deve ter no mínimo 8 caracteres")
+//  @Pattern(
+//          regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$",
+//          message = "Senha deve conter pelo menos 1 letra maiúscula, 1 minúscula, 1 número e 1 caractere especial"
+//  )
   private String senha;
-  private String tipo;
-  private LocalDate dataNascimento;
 
   private List<EnderecoDto> enderecos;
-
-  public boolean validarCpf() {
-    // Remove caracteres não numéricos
-    this.cpf = this.cpf.replaceAll("[^0-9]", "");
-
-    // Verifica se tem 11 dígitos ou se é uma sequência repetida (ex.:
-    // "11111111111")
-    if (this.cpf.length() != 11 || this.cpf.matches("(\\d)\\1{10}")) {
-      return false;
-    }
-
-    try {
-      // Calcula o primeiro dígito verificador
-      int soma = 0;
-      for (int i = 0; i < 9; i++) {
-        soma += Character.getNumericValue(this.cpf.charAt(i)) * (10 - i);
-      }
-      int digito1 = 11 - (soma % 11);
-      if (digito1 > 9)
-        digito1 = 0;
-
-      // Calcula o segundo dígito verificador
-      soma = 0;
-      for (int i = 0; i < 10; i++) {
-        soma += Character.getNumericValue(this.cpf.charAt(i)) * (11 - i);
-      }
-      int digito2 = 11 - (soma % 11);
-      if (digito2 > 9)
-        digito2 = 0;
-
-      // Verifica se os dígitos calculados coincidem com os informados
-      return (Character.getNumericValue(this.cpf.charAt(9)) == digito1)
-          && (Character.getNumericValue(this.cpf.charAt(10)) == digito2);
-
-    } catch (InputMismatchException e) {
-      return false;
-    }
-  }
+  private List<PerfilDto> perfil;
 
 }

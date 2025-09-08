@@ -17,7 +17,7 @@ public class Endereco {
   @ManyToOne
   @JoinColumn(name = "usuario_id", nullable = false, 
   foreignKey = @ForeignKey(name = "fk_usuario_endereco", 
-  foreignKeyDefinition = "FOREIGN KEY (usuario_id) REFERENCES usuarios (usuario_id) ON DELETE CASCADE ON UPDATE CASCADE"
+  foreignKeyDefinition = "FOREIGN KEY (usuario_id) REFERENCES usuario (usuario_id) ON DELETE CASCADE ON UPDATE CASCADE"
 ))
   private Usuario usuario;
   @Enumerated(EnumType.STRING)

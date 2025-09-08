@@ -1,10 +1,11 @@
 package com.tcc.e_language_api.web.dto;
 
+import java.util.UUID;
 import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class ProfessorDto extends UsuarioDto {
-  private Boolean aprovado;
+public class PerfilDto {
+    private String tipoPerfil;
 }
