@@ -12,10 +12,8 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "usuarios")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
-public abstract class Usuario implements Serializable{
+@Table(name = "Usuario")
+public class Usuario implements Serializable{
   @Id
   @GeneratedValue(generator = "uuid_generate_v4()")
   @Column(name = "usuario_id", nullable = false, unique = true)
@@ -28,15 +26,10 @@ public abstract class Usuario implements Serializable{
   private String email;
   @Column(name = "senha", nullable = false)
   private String senha;
-  // @Column(name = "tipo", nullable = false)
-  // private Tipo tipo;
-  @Column(name = "data_nascimento", nullable = false)
-  private LocalDate dataNascimento;
-  @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+  @Column(name = "data_criacao", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+  private LocalDate dataCriacao;
+  @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Endereco> enderecos;
-  
-
-  public enum Tipo {
-    ADMIN, PROFESSOR, ALUNO
-  }  
+  @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<Perfil> perfil;
 }
