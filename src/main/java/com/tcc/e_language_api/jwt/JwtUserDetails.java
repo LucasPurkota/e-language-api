@@ -3,10 +3,8 @@ package com.tcc.e_language_api.jwt;
 import com.tcc.e_language_api.entity.Perfil;
 import com.tcc.e_language_api.entity.Usuario;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.*;
 import java.util.stream.Collectors;

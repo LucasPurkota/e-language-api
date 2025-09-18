@@ -1,11 +1,8 @@
 package com.tcc.e_language_api.web.dto;
 
-import java.time.LocalDate;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.UUID;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

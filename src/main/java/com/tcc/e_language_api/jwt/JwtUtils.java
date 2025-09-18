@@ -1,6 +1,5 @@
 package com.tcc.e_language_api.jwt;
 
-import com.tcc.e_language_api.entity.Perfil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

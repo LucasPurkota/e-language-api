@@ -22,10 +22,6 @@ public class UsuarioService {
   @Transactional
   public void create(UsuarioDto usuarioDto) {
     try {
-//      Usuario usuario = getByEmail(usuarioDto.getEmail());
-//      if (usuario.getUsuarioId() != null) {
-//        throw new RuntimeException("E-mail ja cadastrado");
-//      }
 
       usuarioDto.setSenha(passwordEncoder.encode(usuarioDto.getSenha()));
 

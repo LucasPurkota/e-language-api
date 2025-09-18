@@ -2,7 +2,6 @@ package com.tcc.e_language_api.web.dto.mapper;
 
 import com.tcc.e_language_api.entity.Usuario;
 import com.tcc.e_language_api.web.dto.EnderecoDto;
-import com.tcc.e_language_api.web.dto.PerfilDto;
 import com.tcc.e_language_api.web.dto.UsuarioDto;
 import org.modelmapper.ModelMapper;
 
@@ -18,11 +17,6 @@ public class UsuarioMapper {
             EnderecoDto dto = usuarioDto.getEnderecos().get(usuario.getEnderecos().indexOf(endereco));
             modelMapper.map(dto, endereco);
             endereco.setUsuario(usuario);
-        });
-        usuario.getPerfil().forEach(perfil -> {
-            PerfilDto dto = usuarioDto.getPerfil().get(usuario.getPerfil().indexOf(perfil));
-            modelMapper.map(dto, perfil);
-            perfil.setUsuario(usuario);
         });
         return usuario;
     }

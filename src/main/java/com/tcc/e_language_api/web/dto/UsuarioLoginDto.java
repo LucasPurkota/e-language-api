@@ -1,4 +1,4 @@
-package com.tcc.e_language_api.web.controller;
+package com.tcc.e_language_api.web.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
