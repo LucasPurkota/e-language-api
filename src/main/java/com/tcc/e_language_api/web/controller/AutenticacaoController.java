@@ -26,7 +26,7 @@ public class AutenticacaoController {
 
     @PostMapping("/auth")
     public ResponseEntity<?> autenticar(@RequestBody @Valid UsuarioLoginDto dto, HttpServletRequest request) {
-        log.info("Processo de autenticaçã0  pelo login {}", dto.getEmail());
+        log.info("Processo de autenticação  pelo login {}", dto.getEmail());
         try {
             UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getSenha());

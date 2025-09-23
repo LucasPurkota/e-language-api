@@ -19,18 +19,21 @@ public class UsuarioService {
   private final UsuarioRepository usuarioRepository;
   private final PasswordEncoder passwordEncoder;
 
-  @Transactional
-  public void create(UsuarioDto usuarioDto) {
-    try {
+@Transactional
+public void create(UsuarioDto usuarioDto) {
+  try {
+    usuarioDto.setSenha(passwordEncoder.encode(usuarioDto.getSenha()));
+    Usuario usuario = UsuarioMapper.toEntity(usuarioDto, new Usuario());
 
-      usuarioDto.setSenha(passwordEncoder.encode(usuarioDto.getSenha()));
-
-      usuarioRepository.save(UsuarioMapper.toEntity(usuarioDto, new Usuario()));
-
-    } catch (Exception e) {
-      throw new RuntimeException("Error creating Usuario: " + e.getMessage());
+    if (usuario.getPerfil() != null) {
+      usuario.getPerfil().forEach(perfil -> perfil.setUsuario(usuario));
     }
+
+    usuarioRepository.save(usuario);
+  } catch (Exception e) {
+    throw new RuntimeException("Error creating Usuario: " + e.getMessage());
   }
+}
 
   @Transactional
   public void update(UUID id, UsuarioDto usuarioDto) {
