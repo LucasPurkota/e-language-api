@@ -1,0 +1,546 @@
+{
+	"info": {
+		"_postman_id": "4945cd59-0ba7-4f22-ac49-de8857220d97",
+		"name": "e_language_api API",
+		"description": "e_language_api API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45741874",
+		"_collection_link": "https://gustavoszesz.postman.co/workspace/e-language~0c3e742e-461b-4a33-9837-d2c266b9b6d7/collection/45741874-4945cd59-0ba7-4f22-ac49-de8857220d97?action=share&source=collection_link&creator=45741874"
+	},
+	"item": [
+		{
+			"name": "api/v1/usuarios",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "PUT api/v1/usuarios/{id}",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"usuarioId\": \"3d585971-a8c6-2e63-9a68-1aaf95a63beb\",\n  \"nome\": \"string\",\n  \"cpf\": \"string\",\n  \"email\": \"string\",\n  \"senha\": \"string\",\n  \"enderecos\": [\n    {\n      \"tipo\": \"string\",\n      \"cep\": \"string\",\n      \"logradouro\": \"string\",\n      \"bairro\": \"string\",\n      \"cidade\": \"string\",\n      \"uf\": \"string\",\n      \"pais\": \"string\",\n      \"complemento\": \"string\",\n      \"numero\": 8640\n    },\n    {\n      \"tipo\": \"string\",\n      \"cep\": \"string\",\n      \"logradouro\": \"string\",\n      \"bairro\": \"string\",\n      \"cidade\": \"string\",\n      \"uf\": \"string\",\n      \"pais\": \"string\",\n      \"complemento\": \"string\",\n      \"numero\": 9161\n    }\n  ],\n  \"perfil\": [\n    {\n      \"tipoPerfil\": \"string\"\n    },\n    {\n      \"tipoPerfil\": \"string\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/usuarios/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"usuarios",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "9399e1c2-eb5d-96e8-335f-2845dba89588",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"usuarioId\": \"bf365301-359a-4ca2-ce68-cf1f06e62ed8\",\n  \"nome\": \"string\",\n  \"cpf\": \"string\",\n  \"email\": \"string\",\n  \"senha\": \"string\",\n  \"enderecos\": [\n    {\n      \"tipo\": \"string\",\n      \"cep\": \"string\",\n      \"logradouro\": \"string\",\n      \"bairro\": \"string\",\n      \"cidade\": \"string\",\n      \"uf\": \"string\",\n      \"pais\": \"string\",\n      \"complemento\": \"string\",\n      \"numero\": 7524\n    },\n    {\n      \"tipo\": \"string\",\n      \"cep\": \"string\",\n      \"logradouro\": \"string\",\n      \"bairro\": \"string\",\n      \"cidade\": \"string\",\n      \"uf\": \"string\",\n      \"pais\": \"string\",\n      \"complemento\": \"string\",\n      \"numero\": 6058\n    }\n  ],\n  \"perfil\": [\n    {\n      \"tipoPerfil\": \"string\"\n    },\n    {\n      \"tipoPerfil\": \"string\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/usuarios/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"usuarios",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "9399e1c2-eb5d-96e8-335f-2845dba89588",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "string"
+								}
+							]
+						},
+						{
+							"name": "DELETE api/v1/usuarios/{id}",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/usuarios/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"usuarios",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "9399e1c2-eb5d-96e8-335f-2845dba89588",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/usuarios/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"usuarios",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "9399e1c2-eb5d-96e8-335f-2845dba89588",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "string"
+								}
+							]
+						},
+						{
+							"name": "GET api/v1/usuarios/{id}",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/usuarios/:id=6f437bb6-58d8-499e-9876-3453b2daa4c9",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"usuarios",
+										":id=6f437bb6-58d8-499e-9876-3453b2daa4c9"
+									],
+									"variable": [
+										{
+											"key": "id=6f437bb6-58d8-499e-9876-3453b2daa4c9",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/usuarios/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"usuarios",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "9399e1c2-eb5d-96e8-335f-2845dba89588",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"usuarioId\": \"3d585971-a8c6-2e63-9a68-1aaf95a63beb\",\n  \"nome\": \"string\",\n  \"cpf\": \"string\",\n  \"email\": \"string\",\n  \"senha\": \"string\",\n  \"enderecos\": [\n    {\n      \"tipo\": \"string\",\n      \"cep\": \"string\",\n      \"logradouro\": \"string\",\n      \"bairro\": \"string\",\n      \"cidade\": \"string\",\n      \"uf\": \"string\",\n      \"pais\": \"string\",\n      \"complemento\": \"string\",\n      \"numero\": 8640\n    },\n    {\n      \"tipo\": \"string\",\n      \"cep\": \"string\",\n      \"logradouro\": \"string\",\n      \"bairro\": \"string\",\n      \"cidade\": \"string\",\n      \"uf\": \"string\",\n      \"pais\": \"string\",\n      \"complemento\": \"string\",\n      \"numero\": 9161\n    }\n  ],\n  \"perfil\": [\n    {\n      \"tipoPerfil\": \"string\"\n    },\n    {\n      \"tipoPerfil\": \"string\"\n    }\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "WORKING getById",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYW51ZWxhQGdtYWlsLmNvbSIsImlhdCI6MTc1ODcxNzEyNCwiZXhwIjoxNzU4NzE4OTI0LCJyb2xlcyI6WyJBRE1JTiJdfQ.6GlmxFQeaWa9vRodvL5vJ4TurKFNRTBIEQS1oqW8PfE"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/usuarios/27275c3c-36e6-4c7c-bea9-b54d8a116bad",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"usuarios",
+										"27275c3c-36e6-4c7c-bea9-b54d8a116bad"
+									]
+								},
+								"description": "Generated from cURL: curl --location --request GET 'http://localhost:8080/api/v1/usuarios/27275c3c-36e6-4c7c-bea9-b54d8a116bad' \\\n--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYW51ZWxhQGdtYWlsLmNvbSIsImlhdCI6MTc1ODcxNzEyNCwiZXhwIjoxNzU4NzE4OTI0LCJyb2xlcyI6WyJBRE1JTiJdfQ.6GlmxFQeaWa9vRodvL5vJ4TurKFNRTBIEQS1oqW8PfE' \\\n--header 'Accept: application/json'\n"
+							},
+							"response": []
+						},
+						{
+							"name": "WORKING GET all users",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST api/v1/usuarios",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"usuarioId\": \"3d585971-a8c6-2e63-9a68-1aaf95a63beb\",\n  \"nome\": \"string\",\n  \"cpf\": \"string\",\n  \"email\": \"string\",\n  \"senha\": \"string\",\n  \"enderecos\": [\n    {\n      \"tipo\": \"string\",\n      \"cep\": \"string\",\n      \"logradouro\": \"string\",\n      \"bairro\": \"string\",\n      \"cidade\": \"string\",\n      \"uf\": \"string\",\n      \"pais\": \"string\",\n      \"complemento\": \"string\",\n      \"numero\": 8640\n    },\n    {\n      \"tipo\": \"string\",\n      \"cep\": \"string\",\n      \"logradouro\": \"string\",\n      \"bairro\": \"string\",\n      \"cidade\": \"string\",\n      \"uf\": \"string\",\n      \"pais\": \"string\",\n      \"complemento\": \"string\",\n      \"numero\": 9161\n    }\n  ],\n  \"perfil\": [\n    {\n      \"tipoPerfil\": \"string\"\n    },\n    {\n      \"tipoPerfil\": \"string\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"usuarioId\": \"bf365301-359a-4ca2-ce68-cf1f06e62ed8\",\n  \"nome\": \"string\",\n  \"cpf\": \"string\",\n  \"email\": \"string\",\n  \"senha\": \"string\",\n  \"enderecos\": [\n    {\n      \"tipo\": \"string\",\n      \"cep\": \"string\",\n      \"logradouro\": \"string\",\n      \"bairro\": \"string\",\n      \"cidade\": \"string\",\n      \"uf\": \"string\",\n      \"pais\": \"string\",\n      \"complemento\": \"string\",\n      \"numero\": 7524\n    },\n    {\n      \"tipo\": \"string\",\n      \"cep\": \"string\",\n      \"logradouro\": \"string\",\n      \"bairro\": \"string\",\n      \"cidade\": \"string\",\n      \"uf\": \"string\",\n      \"pais\": \"string\",\n      \"complemento\": \"string\",\n      \"numero\": 6058\n    }\n  ],\n  \"perfil\": [\n    {\n      \"tipoPerfil\": \"string\"\n    },\n    {\n      \"tipoPerfil\": \"string\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/usuarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"usuarios"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "string"
+						}
+					]
+				},
+				{
+					"name": "WORKING api/v1/usuarios",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Manuela Evana\",\n  \"cpf\": \"13813038033\",\n  \"email\": \"manuela@gmail.com\",\n  \"senha\": \"Exemplo@123\",\n  \"enderecos\": [\n    {\n      \"tipo\": \"RESIDENCIAL\",\n      \"cep\": \"83606210\",\n      \"logradouro\": \"Rua carlos andrade\",\n      \"bairro\": \"Ouro verde\",\n      \"cidade\": \"Campo largo\",\n      \"uf\": \"PR\",\n      \"pais\": \"BR\",\n      \"complemento\": \"Nao\",\n      \"numero\": 1073741824\n    }\n  ],\n  \"perfil\": [\n    {\n      \"tipoPerfil\": \"ADMIN\"\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/usuarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"usuarios"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"usuarioId\": \"15b38096-6c70-a976-f883-36141b705b23\",\n    \"nome\": \"string\",\n    \"cpf\": \"string\",\n    \"email\": \"string\",\n    \"senha\": \"string\",\n    \"enderecos\": [\n      {\n        \"tipo\": \"string\",\n        \"cep\": \"string\",\n        \"logradouro\": \"string\",\n        \"bairro\": \"string\",\n        \"cidade\": \"string\",\n        \"uf\": \"string\",\n        \"pais\": \"string\",\n        \"complemento\": \"string\",\n        \"numero\": 521\n      },\n      {\n        \"tipo\": \"string\",\n        \"cep\": \"string\",\n        \"logradouro\": \"string\",\n        \"bairro\": \"string\",\n        \"cidade\": \"string\",\n        \"uf\": \"string\",\n        \"pais\": \"string\",\n        \"complemento\": \"string\",\n        \"numero\": 3054\n      }\n    ],\n    \"perfil\": [\n      {\n        \"tipoPerfil\": \"string\"\n      },\n      {\n        \"tipoPerfil\": \"string\"\n      }\n    ]\n  },\n  {\n    \"usuarioId\": \"0e81acb5-9a56-2160-faed-58982adf3f5b\",\n    \"nome\": \"string\",\n    \"cpf\": \"string\",\n    \"email\": \"string\",\n    \"senha\": \"string\",\n    \"enderecos\": [\n      {\n        \"tipo\": \"string\",\n        \"cep\": \"string\",\n        \"logradouro\": \"string\",\n        \"bairro\": \"string\",\n        \"cidade\": \"string\",\n        \"uf\": \"string\",\n        \"pais\": \"string\",\n        \"complemento\": \"string\",\n        \"numero\": 6519\n      },\n      {\n        \"tipo\": \"string\",\n        \"cep\": \"string\",\n        \"logradouro\": \"string\",\n        \"bairro\": \"string\",\n        \"cidade\": \"string\",\n        \"uf\": \"string\",\n        \"pais\": \"string\",\n        \"complemento\": \"string\",\n        \"numero\": 3796\n      }\n    ],\n    \"perfil\": [\n      {\n        \"tipoPerfil\": \"string\"\n      },\n      {\n        \"tipoPerfil\": \"string\"\n      }\n    ]\n  }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "POST api/v1/auth",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"manuela@gmail.com\",\n  \"senha\": \"Exemplo@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/auth",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"auth"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"string\",\n  \"senha\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
