@@ -1,5 +1,6 @@
 package com.tcc.e_language_api.web.dto.mapper;
 
+import com.tcc.e_language_api.entity.Idioma;
 import com.tcc.e_language_api.entity.NivelIdioma;
 import com.tcc.e_language_api.entity.Unidade;
 import com.tcc.e_language_api.web.dto.UnidadeDto;
@@ -10,8 +11,11 @@ public class UnidadeMapper {
 
     public static Unidade toEntity(UnidadeDto unidadeDto) {
         Unidade unidade = modelMapper.map(unidadeDto, Unidade.class);
+        Idioma idioma = new Idioma();
+        idioma.setIdiomaId(unidadeDto.getIdiomaId());
         NivelIdioma nivelIdioma = new NivelIdioma();
         nivelIdioma.setNivelIdiomaId(unidadeDto.getNivelIdiomaId());
+        unidade.setIdioma(idioma);
         unidade.setNivelIdioma(nivelIdioma);
         return unidade;
     }
