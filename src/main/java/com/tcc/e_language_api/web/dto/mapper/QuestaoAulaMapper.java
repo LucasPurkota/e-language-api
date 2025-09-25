@@ -1,0 +1,27 @@
+package com.tcc.e_language_api.web.dto.mapper;
+
+import com.tcc.e_language_api.entity.*;
+import com.tcc.e_language_api.repository.AulaRepository;
+import com.tcc.e_language_api.web.dto.QuestaoAulaDto;
+import com.tcc.e_language_api.web.dto.UnidadeDto;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+
+@RequiredArgsConstructor
+public class QuestaoAulaMapper {
+    private final static ModelMapper modelMapper = new ModelMapper();
+
+    public static QuestaoAula toEntity(QuestaoAulaDto questaoAulaDto) {
+        QuestaoAula questaoAula = modelMapper.map(questaoAulaDto, QuestaoAula.class);
+        Aula aula = new Aula();
+        aula.setAulaId(questaoAulaDto.getAulaId());
+        NivelDificuldade nivelDificuldade = new NivelDificuldade();
+        nivelDificuldade.setNivelDificuldadeId(questaoAulaDto.getNivelDificuldadeId());
+        TipoQuestao tipoQuestao = new TipoQuestao();
+        tipoQuestao.setTipoQuestaoId(questaoAulaDto.getTipoQuestaoId());
+        questaoAula.setAula(aula);
+        questaoAula.setNivelDificuldade(nivelDificuldade);
+        questaoAula.setTipoQuestao(tipoQuestao);
+        return questaoAula;
+    }
+}

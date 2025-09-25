@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UnidadeDto {
     private UUID unidadeId;
-    private IdiomaDto idioma;
+    private UUID idiomaId;
     private int nivelIdiomaId;
     private int numero;
     private String titulo;
