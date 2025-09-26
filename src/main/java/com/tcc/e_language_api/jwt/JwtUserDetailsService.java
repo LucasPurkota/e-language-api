@@ -34,7 +34,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         Usuario usuario = usuarioService.getByEmail(email);
         List<String> perfis = new ArrayList<>();
         for (int i = 0; i < usuario.getPerfil().toArray().length; i++){
-            perfis.add(usuario.getPerfil().get(i).getTipoPerfil().name());
+            perfis.add(usuario.getPerfil().get(i).getTipoPerfil().getDescricao());
         }
 
         return JwtUtils.createToken(usuario.getEmail(), perfis);

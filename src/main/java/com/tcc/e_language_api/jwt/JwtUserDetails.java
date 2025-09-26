@@ -26,7 +26,7 @@ public class JwtUserDetails extends User {
         return usuario.getPerfil().stream()
                 .map(Perfil::getTipoPerfil)
                 .filter(Objects::nonNull)
-                .map(tipo -> tipo.name())                // converte enum para String
+                .map(tipo -> tipo.getDescricao())                // converte enum para String
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
@@ -40,7 +40,7 @@ public class JwtUserDetails extends User {
     public List<String> getRole() {
         List<String> perfis = new ArrayList<>();
         for (int i = 0; i < this.usuario.getPerfil().toArray().length; i++){
-            perfis.add(this.usuario.getPerfil().get(i).getTipoPerfil().name());
+            perfis.add(this.usuario.getPerfil().get(i).getTipoPerfil().getDescricao());
         }
         return perfis;
     }

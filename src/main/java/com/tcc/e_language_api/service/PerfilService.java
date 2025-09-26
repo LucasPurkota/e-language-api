@@ -1,6 +1,7 @@
 package com.tcc.e_language_api.service;
 
 import com.tcc.e_language_api.entity.Perfil;
+import com.tcc.e_language_api.entity.TipoPerfil;
 import com.tcc.e_language_api.entity.Usuario;
 import com.tcc.e_language_api.repository.PerfilRepository;
 import com.tcc.e_language_api.repository.UsuarioRepository;
@@ -31,22 +32,25 @@ public class PerfilService {
         Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        Perfil.Tipo tipo = Perfil.Tipo.valueOf(dto.getTipoPerfil());
+        TipoPerfil tipoPerfil = new TipoPerfil();
+        tipoPerfil.setTipoPerfilId(dto.getTipoPerfilId());
+
         List<Perfil> perfis = perfilRepository.findByUsuario_UsuarioId(dto.getUsuarioId());
 
-        boolean jaTemPerfil = perfis.stream().anyMatch(p -> p.getTipoPerfil() == tipo);
+        boolean jaTemPerfil = perfis.stream().anyMatch(p -> p.getTipoPerfil().getTipoPerfilId() == tipoPerfil.getTipoPerfilId());
         if (jaTemPerfil) {
-            throw new RuntimeException("Usuário já possui perfil " + tipo);
+            throw new RuntimeException("Usuário já possui perfil " + tipoPerfil.getDescricao());
         }
 
-        long count = perfis.stream().filter(p -> p.getTipoPerfil() == Perfil.Tipo.ALUNO || p.getTipoPerfil() == Perfil.Tipo.PROFESSOR).count();
+        long count = perfis.stream().filter(p -> p.getTipoPerfil().getTipoPerfilId() == 1 || p.getTipoPerfil().getTipoPerfilId() == 2).count();
         if (count >= 2) {
             throw new RuntimeException("Usuário não pode ter mais de dois perfis (ALUNO e PROFESSOR)");
-        }
+    }
 
         Perfil perfil = new Perfil();
         perfil.setUsuario(usuario);
-        perfil.setTipoPerfil(tipo);
+        perfil.setTipoPerfil(tipoPerfil);
+        perfil.setPontosRanking(0.0);
         perfilRepository.save(perfil);
     }
 

@@ -9,5 +9,5 @@ import java.util.UUID;
 @NoArgsConstructor
 public class PerfilDto {
     private UUID usuarioId;
-    private String tipoPerfil;
+    private int tipoPerfilId;
 }

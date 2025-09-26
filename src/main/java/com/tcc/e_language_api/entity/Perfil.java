@@ -23,13 +23,12 @@ public class Perfil {
                     foreignKeyDefinition = "FOREIGN KEY (usuario_id) REFERENCES usuario (usuario_id) ON DELETE CASCADE ON UPDATE CASCADE"
             ))
     private Usuario usuario;
-    @Column(name = "tipo_perfil", nullable = false)
-    private Tipo tipoPerfil;
+    @ManyToOne
+    @JoinColumn(name = "tipo_perfil_id", nullable = false,
+            foreignKey = @ForeignKey(name = "perfil_fk2",
+                    foreignKeyDefinition = "FOREIGN KEY (tipo_perfil_id) REFERENCES tipo_perfil (tipo_perfil_id) ON DELETE CASCADE ON UPDATE CASCADE"
+            ))
+    private TipoPerfil tipoPerfil;
     @Column(name = "postos_ranking")
     private Double pontosRanking;
-
-    //refactor para criar a tabela de tipo perfil
-    public enum Tipo {
-        ADMIN, PROFESSOR, ALUNO
-    }
 }

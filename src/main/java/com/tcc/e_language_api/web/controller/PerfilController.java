@@ -23,7 +23,11 @@ public class PerfilController {
     @PostMapping
     public ResponseEntity<String> createPerfil(@RequestBody PerfilDto dto) {
         System.out.println("Método createPerfil chamado");
-        perfilService.create(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Perfil criado com sucesso!");
+        try {
+            perfilService.create(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Perfil criado com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

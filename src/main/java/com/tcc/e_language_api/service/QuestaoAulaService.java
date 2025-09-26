@@ -16,7 +16,7 @@ public class QuestaoAulaService {
 
     @Transactional
     public void create(QuestaoAula questaoAula, List<String> tipoPerfil){
-        if (!tipoPerfil.contains("ADMIN")) {
+        if (!tipoPerfil.contains("Admin")) {
             throw new RuntimeException("Usario não contem permisão para essa tarefa");
         }
 
