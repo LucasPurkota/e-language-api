@@ -19,3 +19,20 @@ docker-compose down
 
 # 3. Suba os containers novamente, forçando o rebuild das imagens
 docker-compose up --build
+
+
+## troubleshooting atualizado 
+# 1. Parar e remover containers
+docker-compose down
+
+# 2. Remover imagem antiga (opcional, mas recomendado)
+docker rmi e-language-api_backend
+
+# 3. Buildar e rodar novamente
+docker-compose up --build -d
+
+# 4. Verificar status
+docker-compose ps
+
+# 5. Ver logs
+docker-compose logs backend
