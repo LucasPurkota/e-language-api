@@ -4,6 +4,7 @@ import com.tcc.e_language_api.entity.Perfil;
 import com.tcc.e_language_api.entity.TipoPerfil;
 import com.tcc.e_language_api.entity.Usuario;
 import com.tcc.e_language_api.repository.PerfilRepository;
+import com.tcc.e_language_api.repository.TipoPerfilRepository;
 import com.tcc.e_language_api.repository.UsuarioRepository;
 import com.tcc.e_language_api.web.dto.PerfilDto;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.UUID;
 public class PerfilService {
     private final PerfilRepository perfilRepository;
     private final UsuarioRepository usuarioRepository;
+    private final TipoPerfilRepository tipoPerfilRepository;
 
 //    @Transactional
 //    public void create(PerfilDto perfilDto) {
@@ -32,8 +34,8 @@ public class PerfilService {
         Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        TipoPerfil tipoPerfil = new TipoPerfil();
-        tipoPerfil.setTipoPerfilId(dto.getTipoPerfilId());
+        TipoPerfil tipoPerfil = tipoPerfilRepository.findById(dto.getTipoPerfilId())
+                .orElseThrow(() -> new RuntimeException("Tipo de perfil não encontrado"));
 
         List<Perfil> perfis = perfilRepository.findByUsuario_UsuarioId(dto.getUsuarioId());
 
@@ -45,7 +47,7 @@ public class PerfilService {
         long count = perfis.stream().filter(p -> p.getTipoPerfil().getTipoPerfilId() == 1 || p.getTipoPerfil().getTipoPerfilId() == 2).count();
         if (count >= 2) {
             throw new RuntimeException("Usuário não pode ter mais de dois perfis (ALUNO e PROFESSOR)");
-    }
+        }
 
         Perfil perfil = new Perfil();
         perfil.setUsuario(usuario);
