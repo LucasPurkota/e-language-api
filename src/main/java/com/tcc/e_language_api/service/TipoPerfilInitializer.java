@@ -5,11 +5,13 @@ import com.tcc.e_language_api.repository.TipoPerfilRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+                                                                                                                                                                                                                                                                            import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @RequiredArgsConstructor
 @Component
+@Order(1) // Executa primeiro
 public class TipoPerfilInitializer implements CommandLineRunner {
     
     private final TipoPerfilRepository tipoPerfilRepository;
@@ -21,16 +23,15 @@ public class TipoPerfilInitializer implements CommandLineRunner {
 
     private void initializeTiposPerfil() {
         try {
-            // Verificar se já existem tipos de perfil
             if (tipoPerfilRepository.count() == 0) {
                 log.info("Inicializando tipos de perfil...");
                 
                 // Criar tipo ALUNO
                 TipoPerfil aluno = new TipoPerfil();
                 aluno.setTipoPerfilId(1);
-                aluno.setDescricao("ALUNO");
-                tipoPerfilRepository.save(aluno);
-                
+                aluno.setDescricao("ALUNO");                                                                                    
+                tipoPerfilRepository.save(aluno);                               
+
                 // Criar tipo PROFESSOR
                 TipoPerfil professor = new TipoPerfil();
                 professor.setTipoPerfilId(2);

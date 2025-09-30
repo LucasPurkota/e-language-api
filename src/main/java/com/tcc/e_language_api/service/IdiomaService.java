@@ -24,4 +24,12 @@ public class IdiomaService {
             throw new RuntimeException("Error creating Idioma: " + e.getMessage());
         }
     }
+
+    public List<Idioma> getAll() {
+        try {
+            return idiomaRepository.findAll();
+        } catch (Exception e) {
+            throw new RuntimeException("Error fetching idiomas: " + e.getMessage());
+        }
+    }
 }
