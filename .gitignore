@@ -33,6 +33,8 @@ target/
 node_modules/
 /dist
 /.angular/cache
+frontend/.angular/
+frontend/dist/
 
 # IDE files
 .idea/
