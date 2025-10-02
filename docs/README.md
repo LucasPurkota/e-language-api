@@ -163,15 +163,34 @@ docker-compose ps
 # Torna executável
 chmod +x commands.sh
 
-# Comandos disponíveis
-./commands.sh rebuild    # Rebuild completo
-./commands.sh quick      # Rebuild rápido
-./commands.sh start      # Iniciar containers
-./commands.sh stop       # Parar containers
-./commands.sh status     # Ver status
-./commands.sh logs       # Ver logs
-./commands.sh clean      # Limpar tudo
-./commands.sh test       # Testar API
+# Comandos de Build & Deploy
+./commands.sh rebuild          # Rebuild completo (backend + frontend)
+./commands.sh rebuild-back     # Rebuild apenas do backend
+./commands.sh rebuild-front    # Rebuild apenas do frontend
+./commands.sh compile          # Compilar projeto Maven
+
+# Comandos de Controle
+./commands.sh start            # Iniciar todos os containers
+./commands.sh start-back       # Iniciar backend + database
+./commands.sh start-front      # Iniciar apenas frontend
+./commands.sh stop             # Parar todos os containers
+./commands.sh stop-back        # Parar apenas backend
+./commands.sh stop-front       # Parar apenas frontend
+
+# Comandos de Monitoramento
+./commands.sh status           # Ver status de todos serviços
+./commands.sh logs             # Ver logs do backend
+./commands.sh logs-front       # Ver logs do frontend
+./commands.sh logs-all         # Ver logs de todos serviços
+
+# Comandos de Teste
+./commands.sh test             # Testar API (endpoint de usuários)
+./commands.sh test-front       # Testar conexão frontend-backend
+./commands.sh debug-proxy      # Debugar configuração de proxy reverso
+
+# Comandos Diversos
+./commands.sh clean            # Limpar todos containers e volumes
+./commands.sh dev-front        # Rodar frontend em modo desenvolvimento
 ```
 
 #### **Opção 2: PowerShell/CMD**
@@ -179,15 +198,34 @@ chmod +x commands.sh
 REM Verificar pré-requisitos
 .\setup.ps1
 
-REM Comandos disponíveis
-commands.bat rebuild     # Rebuild completo
-commands.bat quick       # Rebuild rápido  
-commands.bat start       # Iniciar containers
-commands.bat stop        # Parar containers
-commands.bat status      # Ver status
-commands.bat logs        # Ver logs
-commands.bat clean       # Limpar tudo
-commands.bat test        # Testar API
+REM Comandos de Build & Deploy
+commands.bat rebuild          REM Rebuild completo (backend + frontend)
+commands.bat rebuild-back     REM Rebuild apenas do backend
+commands.bat rebuild-front    REM Rebuild apenas do frontend
+commands.bat compile          REM Compilar projeto Maven
+
+REM Comandos de Controle
+commands.bat start            REM Iniciar todos os containers
+commands.bat start-back       REM Iniciar backend + database
+commands.bat start-front      REM Iniciar apenas frontend
+commands.bat stop             REM Parar todos os containers
+commands.bat stop-back        REM Parar apenas backend
+commands.bat stop-front       REM Parar apenas frontend
+
+REM Comandos de Monitoramento
+commands.bat status           REM Ver status de todos serviços
+commands.bat logs             REM Ver logs do backend
+commands.bat logs-front       REM Ver logs do frontend
+commands.bat logs-all         REM Ver logs de todos serviços
+
+REM Comandos de Teste
+commands.bat test             REM Testar API (endpoint de usuários)
+commands.bat test-front       REM Testar conexão frontend-backend
+commands.bat debug-proxy      REM Debugar configuração de proxy reverso
+
+REM Comandos Diversos
+commands.bat clean            REM Limpar todos containers e volumes
+commands.bat dev-front        REM Rodar frontend em modo desenvolvimento
 ```
 
 #### **Opção 3: Script Interativo**
@@ -208,19 +246,44 @@ commands.bat test        # Testar API
 
 #### **Primeira vez rodando:**
 ```bash
+# Build completo da aplicação (backend + frontend + banco)
 ./commands.sh rebuild
 ```
 
-#### **Desenvolvendo (dia a dia):**
+#### **Desenvolvimento Backend:**
 ```bash
-# Depois de fazer mudanças no código:
-./commands.sh quick
+# Depois de fazer mudanças no código backend:
+./commands.sh rebuild-back
 
 # Para ver se está funcionando:
 ./commands.sh status
 
-# Para ver logs se der erro:
+# Para ver logs do backend:
 ./commands.sh logs
+```
+
+#### **Desenvolvimento Frontend:**
+```bash
+# Modo 1: Desenvolvimento em contêiner (recomendado para teste integrado)
+./commands.sh rebuild-front  # Após alterações no código Angular
+
+# Modo 2: Desenvolvimento local (mais rápido para iterações)
+./commands.sh start-back     # Inicia apenas o backend
+cd frontend
+npm start                   # Inicia o servidor de desenvolvimento Angular
+# Acesse: http://localhost:4200
+
+# Para ver logs do frontend:
+./commands.sh logs-front
+```
+
+#### **Testando a integração:**
+```bash
+# Testa a comunicação entre frontend e backend
+./commands.sh test-front
+
+# Se houver problemas com o proxy reverso:
+./commands.sh debug-proxy
 ```
 
 #### **Quando der problema:**
@@ -414,10 +477,13 @@ taskkill /PID [numero_do_pid] /F
 
 ## 🎯 URLs Importantes
 
-- **🌐 Swagger UI:** http://localhost:8080/swagger-ui/index.html
+- **🌐 Frontend Angular:** http://localhost:3000
+- **🔧 Backend API:** http://localhost:8080
+- **📚 Swagger UI:** http://localhost:8080/swagger-ui/index.html
 - **📋 API Docs:** http://localhost:8080/v3/api-docs
 - **🔍 Health Check:** http://localhost:8080/actuator/health
-- **🗄️ Database:** localhost:5432 (user: postgres, pass: postgres)
+- **🗄️ Database:** localhost:5432 (user: asdf, pass: asdgf)
+- **👨‍💻 Angular Dev Server:** http://localhost:4200 (quando rodando `npm start`)
 
 ---
 

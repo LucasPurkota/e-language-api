@@ -296,4 +296,33 @@ public class UsuarioApiDocs {
     })
     @SecurityRequirement(name = "Bearer Authentication")
     public @interface GetAllUsuarios {}
+
+    @Target(ElementType.METHOD)
+    @Retention(RetentionPolicy.RUNTIME)
+    @Operation(
+        summary = "Obter usuário atual",
+        description = "Retorna os dados do usuário logado atualmente"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Dados do usuário atual retornados com sucesso"),
+        @ApiResponse(responseCode = "401", description = "Usuário não autenticado"),
+        @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    })
+    @SecurityRequirement(name = "Bearer Authentication")
+    public @interface GetCurrentUser {}
+
+    @Target(ElementType.METHOD)
+    @Retention(RetentionPolicy.RUNTIME)
+    @Operation(
+        summary = "Atualizar status do usuário",
+        description = "Permite atualizar o status de um usuário (ATIVO, INATIVO, BLOQUEADO)"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Status atualizado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Status inválido"),
+        @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+        @ApiResponse(responseCode = "403", description = "Sem permissão para esta operação")
+    })
+    @SecurityRequirement(name = "Bearer Authentication")
+    public @interface UpdateUserStatus {}
 }

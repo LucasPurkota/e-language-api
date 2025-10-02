@@ -1,7 +1,13 @@
 version: '3.8'
+
+networks:
+  e-language-network:
+    driver: bridge
+
 services:
   db:
     image: postgres:15
+    container_name: e-language-db
     environment:
       POSTGRES_DB: e_language
       POSTGRES_USER: asdf
@@ -10,9 +16,12 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+    networks:
+      - e-language-network
 
   backend:
     build: .
+    container_name: e-language-backend
     depends_on:
       - db
     environment:
@@ -22,6 +31,23 @@ services:
     ports:
       - "8080:8080"
     restart: always
+    networks:
+      - e-language-network
+
+  mini-frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: e-language-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: always
+    environment:
+      - NODE_ENV=production
+    networks:
+      - e-language-network
 
 volumes:
   db_data:
