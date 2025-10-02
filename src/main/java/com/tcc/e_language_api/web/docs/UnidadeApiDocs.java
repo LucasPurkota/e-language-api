@@ -30,10 +30,29 @@ public class UnidadeApiDocs {
         @ApiResponse(
             responseCode = "200", 
             description = "Unidade encontrada com sucesso",
-            content = @Content(schema = @Schema(implementation = UnidadeDto.class))
+            content = @Content(
+                schema = @Schema(implementation = UnidadeDto.class),
+                examples = @ExampleObject(
+                    name = "Unidade Encontrada",
+                    summary = "Exemplo de unidade retornada",
+                    description = "Dados completos de uma unidade específica",
+                    value = """
+                        {
+                          "unidadeId": "8c6be421-cdcd-427c-887a-cd5519990762",
+                          "idiomaId": "4323b23e-6a60-4ad4-9c25-27ac8720caff",
+                          "nivelIdiomaId": 1,
+                          "numero": 5,
+                          "titulo": "How are you",
+                          "conteudo": "verbos....."
+                        }
+                        """
+                )
+            )
         ),
-        @ApiResponse(responseCode = "404", description = "Unidade não encontrada")
+        @ApiResponse(responseCode = "404", description = "Unidade não encontrada"),
+        @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
+    @SecurityRequirement(name = "Bearer Authentication")
     public @interface GetById {}
 
     @Target(ElementType.METHOD)
