@@ -16,7 +16,7 @@ public class IdiomaService {
     @Transactional
     public void create(Idioma idioma, List<String> tipoPerfil) {
         try {
-            if (!tipoPerfil.contains("Admin")) {
+            if (!tipoPerfil.contains("ADMIN")) {
                 throw new RuntimeException("Usario não contem permisão para essa tarefa");
             }
             idiomaRepository.save(idioma);

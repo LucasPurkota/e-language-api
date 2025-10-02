@@ -37,8 +37,14 @@ public class TipoPerfilInitializer implements CommandLineRunner {
                 professor.setTipoPerfilId(2);
                 professor.setDescricao("PROFESSOR");
                 tipoPerfilRepository.save(professor);
-                
-                log.info("Tipos de perfil criados: 1=ALUNO, 2=PROFESSOR");
+
+                // Criar tipo ADMIN
+                TipoPerfil admin = new TipoPerfil();
+                admin.setTipoPerfilId(3);
+                admin.setDescricao("ADMIN");
+                tipoPerfilRepository.save(admin);
+
+                log.info("Tipos de perfil criados: 1=ALUNO, 2=PROFESSOR, 3=ADMIN");
             } else {
                 log.info("Tipos de perfil já existem no banco de dados");
             }
