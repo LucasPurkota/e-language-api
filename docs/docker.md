@@ -1,5 +1,7 @@
 # Rodando com Docker
 
+## Obs: todas as funcôes aqui estão prontas para rodar direto do arquivo Commands.sh | .bat
+
 1. Instale Docker e Docker Compose.
 2. Execute:
    ```bash
@@ -36,3 +38,4 @@ docker-compose ps
 
 # 5. Ver logs
 docker-compose logs backend
+

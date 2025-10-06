@@ -156,18 +156,105 @@ show_menu() {
     echo -e "${BLUE}================================${NC}"
     echo -e "${BLUE}    E-Language API - Dev Script${NC}"
     echo -e "${BLUE}================================${NC}"
-    echo "1) 🔄 Rebuild Completo (stop + compile + build + start)"
-    echo "2) ⚡ Rebuild Rápido (só backend)"
-    echo "3) 🛠️  Compilar Projeto"
-    echo "4) 🐳 Buildar e Iniciar Containers"
-    echo "5) ▶️  Iniciar Containers"
-    echo "6) ⏹️  Parar Containers"
-    echo "7) 📋 Ver Logs"
-    echo "8) 📊 Mostrar Status"
-    echo "9) 🧪 Testar Endpoints"
-    echo "10) 🧹 Limpar Tudo"
+    echo -e "${YELLOW}[Build & Deploy]${NC}"
+    echo "1) 🔄 Rebuild Completo (backend + frontend)"
+    echo "2) ⚡ Rebuild Backend"
+    echo "3) 🎨 Rebuild Frontend"
+    echo "4) 🛠️ Compilar Projeto Maven"
+    
+    echo -e "\n${YELLOW}[Controle de Serviços]${NC}"
+    echo "5) ▶️  Iniciar Todos Containers"
+    echo "6) ▶️  Iniciar Backend + Database"
+    echo "7) ▶️  Iniciar Frontend"
+    echo "8) ⏹️  Parar Todos Containers"
+    echo "9) ⏹️  Parar Backend"
+    echo "10) ⏹️ Parar Frontend"
+    
+    echo -e "\n${YELLOW}[Monitoramento]${NC}"
+    echo "11) 📋 Ver Logs Backend"
+    echo "12) 📋 Ver Logs Frontend"
+    echo "13) 📋 Ver Todos os Logs"
+    echo "14) 📊 Mostrar Status"
+    
+    echo -e "\n${YELLOW}[Testes]${NC}"
+    echo "15) 🧪 Testar API (usuários)"
+    echo "16) 🧪 Testar Conexão Frontend-Backend"
+    echo "17) 🔍 Debugar Proxy Reverso"
+    
+    echo -e "\n${YELLOW}[Diversos]${NC}"
+    echo "18) 🧹 Limpar Tudo"
+    echo "19) 💻 Rodar Frontend em Modo Desenvolvimento"
     echo "0) ❌ Sair"
     echo -e "${BLUE}================================${NC}"
+}
+
+# Funções para o frontend
+rebuild_frontend() {
+    print_info "Rebuilding frontend..."
+    docker-compose stop mini-frontend
+    docker-compose rm -f mini-frontend
+    docker-compose up --build -d mini-frontend
+    check_command "Frontend rebuilded e iniciado"
+    echo "Frontend disponível em: http://localhost:3000"
+}
+
+start_frontend() {
+    print_info "Iniciando apenas frontend..."
+    docker-compose up -d mini-frontend
+    check_command "Frontend iniciado"
+    echo "Frontend disponível em: http://localhost:3000"
+}
+
+stop_frontend() {
+    print_info "Parando frontend..."
+    docker-compose stop mini-frontend
+    check_command "Frontend parado"
+}
+
+show_frontend_logs() {
+    print_info "Mostrando logs do frontend..."
+    docker-compose logs -f mini-frontend
+}
+
+show_all_logs() {
+    print_info "Mostrando logs de todos os serviços..."
+    docker-compose logs -f
+}
+
+start_backend() {
+    print_info "Iniciando backend e database..."
+    docker-compose up -d db backend
+    check_command "Backend e database iniciados"
+}
+
+stop_backend() {
+    print_info "Parando backend..."
+    docker-compose stop backend
+    check_command "Backend parado"
+}
+
+test_frontend_connection() {
+    print_info "Testando conexão frontend-backend..."
+    curl -s http://localhost:3000 > /dev/null && print_success "✅ Frontend acessível" || print_error "❌ Frontend inacessível"
+    curl -s http://localhost:8080/api/v1/usuarios > /dev/null && print_success "✅ API backend diretamente acessível" || print_error "❌ API backend diretamente inacessível"
+    print_info "Verificando se o proxy reverso do Nginx está funcionando..."
+    curl -s http://localhost:3000/api/v1/usuarios > /dev/null && print_success "✅ API via proxy Nginx acessível" || print_error "❌ API via proxy Nginx inacessível"
+}
+
+debug_proxy() {
+    print_info "Debugando configuração de proxy reverso..."
+    print_info "Verificando se o backend está acessível internamente pelo frontend..."
+    docker exec -it e-language-frontend wget -O- --timeout=2 http://backend:8080/api/v1/usuarios || echo "Falha na conexão interna"
+    print_info "Verificando a configuração do Nginx..."
+    docker exec -it e-language-frontend cat /etc/nginx/conf.d/default.conf
+    print_info "Verificando logs de erro do Nginx..."
+    docker exec -it e-language-frontend tail /var/log/nginx/error.log
+}
+
+run_frontend_dev() {
+    print_info "Iniciando frontend em modo desenvolvimento..."
+    print_info "Certifique-se de que o backend está rodando com ./commands.sh start-back"
+    cd frontend && npm install && npm start
 }
 
 # Loop principal
@@ -183,28 +270,55 @@ while true; do
             quick_rebuild
             ;;
         3)
-            compile_project
+            rebuild_frontend
             ;;
         4)
-            build_and_start
+            compile_project
             ;;
         5)
             start_containers
             ;;
         6)
-            stop_containers
+            start_backend
             ;;
         7)
-            show_logs
+            start_frontend
             ;;
         8)
-            show_status
+            stop_containers
             ;;
         9)
-            test_endpoints
+            stop_backend
             ;;
         10)
+            stop_frontend
+            ;;
+        11)
+            show_logs
+            ;;
+        12)
+            show_frontend_logs
+            ;;
+        13)
+            show_all_logs
+            ;;
+        14)
+            show_status
+            ;;
+        15)
+            test_endpoints
+            ;;
+        16)
+            test_frontend_connection
+            ;;
+        17)
+            debug_proxy
+            ;;
+        18)
             clean_all
+            ;;
+        19)
+            run_frontend_dev
             ;;
         0)
             print_info "Saindo..."

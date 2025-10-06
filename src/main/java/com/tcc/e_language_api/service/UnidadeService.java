@@ -1,12 +1,14 @@
 package com.tcc.e_language_api.service;
 
 import com.tcc.e_language_api.entity.Unidade;
+import com.tcc.e_language_api.exception.EntityNotFoundException;
 import com.tcc.e_language_api.repository.UnidadeRepository;
 import com.tcc.e_language_api.repository.IdiomaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -19,7 +21,7 @@ public class UnidadeService {
     private IdiomaRepository idiomaRepository;
 
     public void create(Unidade unidade, List<String> tipoPerfil) {
-        if (!tipoPerfil.contains("Admin")) {
+        if (!tipoPerfil.contains("ADMIN")) {
             throw new RuntimeException("Usario não contem permisão para essa tarefa");
         }
 
@@ -36,5 +38,21 @@ public class UnidadeService {
         }
 
         unidadeRepository.save(unidade);
+    }
+
+    public Unidade getById(UUID id) {
+        return unidadeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Unidade não encontrada com ID: " + id));
+    }
+
+    public List<Unidade> getAll() {
+        return unidadeRepository.findAll();
+    }
+
+    public List<Unidade> getByIdiomaId(UUID idiomaId) {
+        if (!idiomaRepository.existsById(idiomaId)) {
+            throw new EntityNotFoundException("Idioma não encontrado com ID: " + idiomaId);
+        }
+        return unidadeRepository.findByIdiomaIdiomaId(idiomaId);
     }
 }

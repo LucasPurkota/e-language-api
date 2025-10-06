@@ -1,0 +1,43 @@
+<div class="container">
+  <h1>Novo Usuário</h1>
+
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nome">Nome *</label>
+      <input type="text" id="nome" formControlName="nome" placeholder="Nome completo">
+      <div *ngIf="usuarioForm.get('nome')?.invalid && usuarioForm.get('nome')?.touched" class="error-text">
+        <span *ngIf="usuarioForm.get('nome')?.errors?.['required']">Nome é obrigatório</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cpf">CPF *</label>
+      <input type="text" id="cpf" formControlName="cpf" placeholder="000.000.000-00">
+      <div *ngIf="usuarioForm.get('cpf')?.invalid && usuarioForm.get('cpf')?.touched" class="error-text">
+        <span *ngIf="usuarioForm.get('cpf')?.errors?.['required']">CPF é obrigatório</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <input type="email" id="email" formControlName="email" placeholder="email@exemplo.com">
+      <div *ngIf="usuarioForm.get('email')?.invalid && usuarioForm.get('email')?.touched" class="error-text">
+        <span *ngIf="usuarioForm.get('email')?.errors?.['required']">Email é obrigatório</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="senha">Senha *</label>
+      <input type="password" id="senha" formControlName="senha" placeholder="Mínimo 6 caracteres">
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="onCancel()">Cancelar</button>
+      <button type="submit" class="btn-primary" [disabled]="usuarioForm.invalid || loading">
+        {{ loading ? 'Salvando...' : 'Criar' }}
+      </button>
+    </div>
+  </form>
+</div>

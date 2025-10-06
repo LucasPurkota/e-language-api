@@ -19,4 +19,15 @@ public class UnidadeMapper {
         unidade.setNivelIdioma(nivelIdioma);
         return unidade;
     }
+
+    public static UnidadeDto toDto(Unidade unidade) {
+        UnidadeDto dto = modelMapper.map(unidade, UnidadeDto.class);
+        if (unidade.getIdioma() != null) {
+            dto.setIdiomaId(unidade.getIdioma().getIdiomaId());
+        }
+        if (unidade.getNivelIdioma() != null) {
+            dto.setNivelIdiomaId(unidade.getNivelIdioma().getNivelIdiomaId());
+        }
+        return dto;
+    }
 }

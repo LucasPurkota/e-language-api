@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>E-Language API - Usuários</h1>
+  
+  <div class="actions">
+    <button (click)="criarUsuario()" class="btn-create">Novo Usuário</button>
+    <button (click)="carregarUsuarios()" class="btn-refresh">Atualizar Lista</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">Carregando...</div>
+  
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+  
+  <table *ngIf="!loading && !error && usuarios.length > 0" class="users-table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Perfil</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.perfilPrincipal || 'N/A' }}</td>
+        <td>{{ usuario.status || 'Ativo' }}</td>
+        <td class="actions">
+          <button (click)="excluirUsuario(usuario.usuarioId)" class="btn-delete">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div *ngIf="!loading && !error && usuarios.length === 0" class="no-data">
+    Nenhum usuário encontrado
+  </div>
+</div>
