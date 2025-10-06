@@ -42,6 +42,7 @@ frontend/dist/
 *.iws
 *.iml
 *.ipr
+*.properties
 .project
 .classpath
 .settings/
