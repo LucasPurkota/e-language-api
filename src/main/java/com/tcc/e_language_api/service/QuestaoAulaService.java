@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RequiredArgsConstructor
@@ -21,5 +22,16 @@ public class QuestaoAulaService {
         }
 
         questaoAulaRepository.save(questaoAula);
+    }
+
+    @Transactional
+    public QuestaoAula getById(UUID id) {
+        return questaoAulaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Questão Aula não encontrada"));
+    }
+
+    @Transactional
+    public List<QuestaoAula> getAll() {
+        return questaoAulaRepository.findAll();
     }
 }
