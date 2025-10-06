@@ -1,23 +1,17 @@
 package com.tcc.e_language_api.web.controller;
 
 import com.tcc.e_language_api.entity.AlternativaQuestaoAula;
-import com.tcc.e_language_api.entity.QuestaoAula;
 import com.tcc.e_language_api.jwt.JwtUserDetails;
 import com.tcc.e_language_api.service.AlternativaQuestaoAulaService;
 import com.tcc.e_language_api.web.dto.AlternativaQuestaoAulaDto;
-import com.tcc.e_language_api.web.dto.QuestaoAulaDto;
 import com.tcc.e_language_api.web.dto.mapper.AlternativaQuestaoAulaMapper;
-import com.tcc.e_language_api.web.dto.mapper.QuestaoAulaMapper;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.openmbean.CompositeData;
 import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController

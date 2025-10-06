@@ -4,7 +4,6 @@ import com.tcc.e_language_api.entity.QuestaoAula;
 import com.tcc.e_language_api.jwt.JwtUserDetails;
 import com.tcc.e_language_api.service.QuestaoAulaService;
 import com.tcc.e_language_api.web.dto.QuestaoAulaDto;
-import com.tcc.e_language_api.web.dto.UsuarioDto;
 import com.tcc.e_language_api.web.dto.mapper.QuestaoAulaMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

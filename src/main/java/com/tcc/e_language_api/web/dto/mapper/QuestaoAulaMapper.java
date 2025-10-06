@@ -1,9 +1,7 @@
 package com.tcc.e_language_api.web.dto.mapper;
 
 import com.tcc.e_language_api.entity.*;
-import com.tcc.e_language_api.repository.AulaRepository;
 import com.tcc.e_language_api.web.dto.QuestaoAulaDto;
-import com.tcc.e_language_api.web.dto.UnidadeDto;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 
