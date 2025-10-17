@@ -3,6 +3,7 @@ package com.tcc.e_language_api.service;
 import com.tcc.e_language_api.entity.Perfil;
 import com.tcc.e_language_api.entity.TipoPerfil;
 import com.tcc.e_language_api.entity.Usuario;
+import com.tcc.e_language_api.exception.EntityNotFoundException;
 import com.tcc.e_language_api.repository.PerfilRepository;
 import com.tcc.e_language_api.repository.TipoPerfilRepository;
 import com.tcc.e_language_api.repository.UsuarioRepository;
@@ -56,6 +57,7 @@ public class PerfilService {
         perfilRepository.save(perfil);
     }
 
+    @Transactional
     public List<Perfil> getByUserId(UUID userId) {
         try {
             List<Perfil> perfil = perfilRepository.findByUsuario_UsuarioId(userId);
@@ -63,5 +65,11 @@ public class PerfilService {
         } catch (Exception e) {
             throw new RuntimeException("Error creating Usuario: " + e.getMessage());
         }
+    }
+
+    @Transactional
+    public Perfil getById(UUID perfilId) {
+        return perfilRepository.findById(perfilId)
+                .orElseThrow(() -> new EntityNotFoundException("Unidade não encontrada com ID: " + perfilId));
     }
 }

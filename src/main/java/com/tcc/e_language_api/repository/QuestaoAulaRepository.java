@@ -20,4 +20,12 @@ public interface QuestaoAulaRepository extends JpaRepository<QuestaoAula, UUID>{
             "ORDER BY RANDOM() LIMIT 5",
             nativeQuery = true)
     List<QuestaoAula> findFiveQuestionByNivel(@Param("idioma") String idioma, @Param("nivel") int nivel);
+
+    @Query(value = "SELECT q.* FROM questao_aula q " +
+            "LEFT JOIN aula a ON q.aula_id = a.aula_id " +
+            "LEFT JOIN unidade u ON a.unidade_id = u.unidade_id " +
+            "WHERE u.unidade_id = :unidade_id " +
+            "ORDER BY RANDOM() LIMIT 10",
+            nativeQuery = true)
+    List<QuestaoAula> findTenQuestionsByUnidade(@Param("unidade_id") UUID unidadeId);
 }
