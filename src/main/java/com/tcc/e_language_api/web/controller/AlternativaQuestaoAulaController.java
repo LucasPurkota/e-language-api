@@ -3,8 +3,10 @@ package com.tcc.e_language_api.web.controller;
 import com.tcc.e_language_api.entity.AlternativaQuestaoAula;
 import com.tcc.e_language_api.jwt.JwtUserDetails;
 import com.tcc.e_language_api.service.AlternativaQuestaoAulaService;
+import com.tcc.e_language_api.web.docs.AlternativaQuestaoAulaApiDocs;
 import com.tcc.e_language_api.web.dto.AlternativaQuestaoAulaDto;
 import com.tcc.e_language_api.web.dto.mapper.AlternativaQuestaoAulaMapper;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +18,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("api/v1/alternativa-questao-aula")
+@Tag(name = "Alternativa Questao Aula", description = "Operações relacionadas ao gerenciamento de alternativa para questao aula")
 public class AlternativaQuestaoAulaController {
     private final AlternativaQuestaoAulaService alternativaQuestaoAulaService;
 
     @PostMapping
+    @AlternativaQuestaoAulaApiDocs.Create
     public ResponseEntity<String> create(@RequestBody AlternativaQuestaoAulaDto dto, @AuthenticationPrincipal JwtUserDetails userDetails) {
         try{
             alternativaQuestaoAulaService.create(AlternativaQuestaoAulaMapper.toEntity(dto), userDetails.getRole()) ;

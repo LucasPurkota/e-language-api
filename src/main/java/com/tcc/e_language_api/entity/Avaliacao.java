@@ -28,7 +28,7 @@ public class Avaliacao {
     private AlunoUnidade alunoUnidade;
     @Column(name = "nota")
     private int nota;
-    @Column(name = "data_realizacao", nullable = false)
+    @Column(name = "data_realizacao")
     private LocalDateTime dataRealizacao;
     @OneToMany(mappedBy = "avaliacao",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AvaliacaoQuestaoAula> avaliacaoQuestaoAula;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/avaliacaod-satisfacao-professor")
+@RequestMapping("/api/v1/avaliacao-satisfacao-professor")
 @RequiredArgsConstructor
 public class AvaliacaoSatisfacaoProfessorController {
     private final AvaliacaoSatisfacaoProfessorService avaliacaoSatisfacaoProfessorService;

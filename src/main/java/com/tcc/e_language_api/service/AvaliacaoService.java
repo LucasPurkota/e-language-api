@@ -36,6 +36,7 @@ public class AvaliacaoService {
         List<AvaliacaoQuestaoAula> questoesAvaliacao = new ArrayList<>();
         for (QuestaoAula questao : questoes) {
             AvaliacaoQuestaoAula avaliacaoQuestaoAula = new AvaliacaoQuestaoAula();
+            avaliacaoQuestaoAula.setAvaliacao(avaliacao);
             avaliacaoQuestaoAula.setQuestaoAula(questao);
             questoesAvaliacao.add(avaliacaoQuestaoAula);
         }
