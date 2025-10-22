@@ -29,19 +29,19 @@ public class NivelIdiomaInitializer implements CommandLineRunner {
                 // Criar nível BÁSICO
                 NivelIdioma basico = new NivelIdioma();
                 basico.setNivelIdiomaId(1);
-                basico.setDescricao("BÁSICO");
+                basico.setDescricao("Iniciante");
                 nivelIdiomaRepository.save(basico);
 
                 // Criar nível INTERMEDIÁRIO
                 NivelIdioma intermediario = new NivelIdioma();
                 intermediario.setNivelIdiomaId(2);
-                intermediario.setDescricao("INTERMEDIÁRIO");
+                intermediario.setDescricao("Intermediário");
                 nivelIdiomaRepository.save(intermediario);
 
                 // Criar nível AVANÇADO
                 NivelIdioma avancado = new NivelIdioma();
                 avancado.setNivelIdiomaId(3);
-                avancado.setDescricao("AVANÇADO");
+                avancado.setDescricao("Avançado");
                 nivelIdiomaRepository.save(avancado);
 
                 log.info("Níveis de idioma criados: 1=BÁSICO, 2=INTERMEDIÁRIO, 3=AVANÇADO");
