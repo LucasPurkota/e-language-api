@@ -5,17 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.tcc.e_language_api.entity.*;
+import com.tcc.e_language_api.repository.*;
 import org.springframework.stereotype.Service;
-
-import com.tcc.e_language_api.entity.Idioma;
-import com.tcc.e_language_api.entity.Nivelamento;
-import com.tcc.e_language_api.entity.NivelamentoQuestaoAula;
-import com.tcc.e_language_api.entity.Perfil;
-import com.tcc.e_language_api.entity.QuestaoAula;
-import com.tcc.e_language_api.repository.IdiomaRepository;
-import com.tcc.e_language_api.repository.NivelamentoRepository;
-import com.tcc.e_language_api.repository.PerfilRepository;
-import com.tcc.e_language_api.repository.QuestaoAulaRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -27,21 +19,25 @@ public class NivelamentoService {
     private final QuestaoAulaRepository questaoAulaRepository;
     private final PerfilRepository perfilRepository;
     private final IdiomaRepository idiomaRepository;
+    private final PerfilIdiomaRepository perfilIdiomaRepository;
 
     @Transactional
-    public void create(String nomeIdioma, UUID perfilId) {
-        Perfil perfil = perfilRepository.findById(perfilId).orElseThrow(() -> new RuntimeException("Usuario not found"));
-        Idioma idioma = idiomaRepository.findByNome(nomeIdioma).orElseThrow(() -> new RuntimeException("Idioma not found"));
-        
+    public void create(String idioma, UUID perfilId) {
+        PerfilIdioma perfilIdioma = perfilIdiomaRepository.findByIdiomaAndPerfil(idioma, perfilId);
 
         List<QuestaoAula> questoes = new ArrayList<>(); 
-        questoes.addAll(questaoAulaRepository.findFiveQuestionByNivel(nomeIdioma, 1));
-        questoes.addAll(questaoAulaRepository.findFiveQuestionByNivel(nomeIdioma, 2));
-        questoes.addAll(questaoAulaRepository.findFiveQuestionByNivel(nomeIdioma, 3));
-        
+        questoes.addAll(questaoAulaRepository.findThreeQuestionByNivel(idioma, 1, 1));
+        questoes.addAll(questaoAulaRepository.findThreeQuestionByNivel(idioma, 2, 1));
+        questoes.addAll(questaoAulaRepository.findThreeQuestionByNivel(idioma, 3, 1));
+        questoes.addAll(questaoAulaRepository.findThreeQuestionByNivel(idioma, 1, 2));
+        questoes.addAll(questaoAulaRepository.findThreeQuestionByNivel(idioma, 2, 2));
+        questoes.addAll(questaoAulaRepository.findThreeQuestionByNivel(idioma, 3, 2));
+        questoes.addAll(questaoAulaRepository.findThreeQuestionByNivel(idioma, 1, 3));
+        questoes.addAll(questaoAulaRepository.findThreeQuestionByNivel(idioma, 2, 3));
+        questoes.addAll(questaoAulaRepository.findThreeQuestionByNivel(idioma, 3, 3));
+
         Nivelamento nivelamento = new Nivelamento();
-        nivelamento.setPerfil(perfil);
-        nivelamento.setIdioma(idioma);
+        nivelamento.setPerfilIdioma(perfilIdioma);
         nivelamento.setDataRealizacao(LocalDateTime.now());
 
         List<NivelamentoQuestaoAula> nivelamentoQuestaoAula = new ArrayList<>();
@@ -53,8 +49,15 @@ public class NivelamentoService {
         }
 
         nivelamento.setNivelamentoQuestaoAulas(nivelamentoQuestaoAula);
+        Status status = new Status();
+        status.setStatusId(1);
+        nivelamento.setStatus(status);
         nivelamentoRepository.save(nivelamento);
 
     }
-    
+
+    @Transactional
+    public Nivelamento getNivelamentoPendente(UUID perfilId, String idioma) {
+        return nivelamentoRepository.findNivelamentoPendente(idioma, perfilId);
+    }
 }

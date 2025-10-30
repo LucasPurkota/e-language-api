@@ -38,6 +38,26 @@ public class UnidadeController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable UUID id, @RequestBody UnidadeDto dto, @AuthenticationPrincipal JwtUserDetails userDetails) {
+        try {
+            unidadeService.update(id, dto, userDetails.getRole());
+            return ResponseEntity.ok("Unidade alterada com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable UUID id, @AuthenticationPrincipal JwtUserDetails userDetails) {
+        try {
+            unidadeService.delete(id, userDetails.getRole());
+            return ResponseEntity.ok("Unidade deletada com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @GetMapping("/{id}")
     @UnidadeApiDocs.GetById
     @SecurityRequirement(name = "Bearer Authentication")

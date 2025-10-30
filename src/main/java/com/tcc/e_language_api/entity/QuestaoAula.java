@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -41,5 +42,7 @@ public class QuestaoAula {
             ))
     private TipoQuestao tipoQuestao;
     @Column(name = "gabarito")
-    private UUID gabarito;
+    private String gabarito;
+    @OneToMany(mappedBy = "questaoAula",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AlternativaQuestaoAula> alternativas;
 }
