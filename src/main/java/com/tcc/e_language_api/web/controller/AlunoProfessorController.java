@@ -13,10 +13,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -31,6 +31,36 @@ public class AlunoProfessorController {
         try{
             alunoProfessorService.create(AlunoProfessorMapper.toEntity(dto)) ;
             return ResponseEntity.status(HttpStatus.CREATED).body("Aluno vinculado a um professor!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable UUID id) {
+        try{
+            alunoProfessorService.delete(id); ;
+            return ResponseEntity.status(HttpStatus.CREATED).body("vinculo excluido com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable UUID id) {
+        try{
+            AlunoProfessor alunoProfessor = alunoProfessorService.getById(id); ;
+            return ResponseEntity.status(HttpStatus.CREATED).body(AlunoProfessorMapper.toDto(alunoProfessor));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAll() {
+        try{
+            List<AlunoProfessor> alunoProfessor = alunoProfessorService.getAll(); ;
+            return ResponseEntity.status(HttpStatus.CREATED).body(AlunoProfessorMapper.toListDto(alunoProfessor));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

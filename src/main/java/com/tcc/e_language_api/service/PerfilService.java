@@ -22,14 +22,6 @@ public class PerfilService {
     private final UsuarioRepository usuarioRepository;
     private final TipoPerfilRepository tipoPerfilRepository;
 
-//    @Transactional
-//    public void create(PerfilDto perfilDto) {
-//        try {
-//            perfilRepository.save(UsuarioMapper.toEntity(perfilDto, new Perfil()));
-//        } catch (Exception e) {
-//            throw new RuntimeException("Error creating Usuario: " + e.getMessage());
-//        }
-//    }
     @Transactional
     public void create(PerfilDto dto) {
         Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
@@ -71,5 +63,17 @@ public class PerfilService {
     public Perfil getById(UUID perfilId) {
         return perfilRepository.findById(perfilId)
                 .orElseThrow(() -> new EntityNotFoundException("Unidade não encontrada com ID: " + perfilId));
+    }
+
+    @Transactional
+    public void delete(UUID id) {
+        getById(id);
+
+        perfilRepository.deleteById(id);
+    }
+
+    @Transactional
+    public List<Perfil> getByTipoPerfil(int tipoPerfilId) {
+        return perfilRepository.findByTipoPerfil_PerfilId(tipoPerfilId);
     }
 }

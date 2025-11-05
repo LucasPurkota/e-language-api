@@ -21,4 +21,9 @@ public class QuestaoPersonalizadaService {
 
         questaoPersonalizadaRepository.save(questaoPersonalizada);
     }
+
+    //update
+    //delete
+    //gelbyid
+    //getbyaluno
 }

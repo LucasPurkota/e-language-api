@@ -37,4 +37,22 @@ public class PerfilIdiomaService {
         }
         perfilIdiomaRepository.save(perfilIdioma);
     }
+
+    @Transactional
+    public void delete(UUID id) {
+        getById(id);
+        perfilIdiomaRepository.deleteById(id);
+    }
+
+    @Transactional
+    public PerfilIdioma getById(UUID id) {
+        return perfilIdiomaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Aluno Unidade not found"));
+    }
+
+    @Transactional
+    public List<PerfilIdioma> getByPerfil(UUID perfilId) {
+        return perfilIdiomaRepository.findByPerfilPerfilId(perfilId);
+    }
+
 }

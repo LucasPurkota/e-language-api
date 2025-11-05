@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AlternativaQuestaoPersonalizadaDto {
-    private UUID alternativaQuestaoPersonalizada;
+    private UUID alternativaQuestaoPersonalizadaId;
     private UUID questaoPersonalizadaId;
     private String alternativa;
     private String descricao;

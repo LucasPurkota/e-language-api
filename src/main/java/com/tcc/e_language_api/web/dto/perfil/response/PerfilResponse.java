@@ -17,7 +17,7 @@ public class PerfilResponse {
     private UUID perfilId;
     
     @Schema(description = "ID do tipo de perfil", example = "1")
-    private Integer tipoPerfilId;
+    private int tipoPerfilId;
     
     @Schema(description = "Descrição do tipo de perfil", example = "ALUNO")
     private String tipoPerfilDescricao;

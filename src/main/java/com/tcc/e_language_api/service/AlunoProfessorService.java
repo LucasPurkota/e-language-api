@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class AlunoProfessorService {
@@ -14,5 +17,22 @@ public class AlunoProfessorService {
     @Transactional
     public void create(AlunoProfessor alunoProfessor) {
         alunoProfessorRepository.save(alunoProfessor);
+    }
+
+    @Transactional
+    public void delete(UUID id) {
+        getById(id);
+        alunoProfessorRepository.deleteById(id);
+    }
+
+    @Transactional
+    public AlunoProfessor getById(UUID id) {
+        return alunoProfessorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Aluno Professor not found"));
+    }
+
+    @Transactional
+    public List<AlunoProfessor> getAll() {
+        return alunoProfessorRepository.findAll();
     }
 }

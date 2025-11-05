@@ -1,8 +1,10 @@
 package com.tcc.e_language_api.web.controller;
 
+import com.tcc.e_language_api.entity.AlunoProfessor;
 import com.tcc.e_language_api.entity.PerfilIdioma;
 import com.tcc.e_language_api.service.PerfilIdiomaService;
 import com.tcc.e_language_api.web.dto.PerfilIdiomaDto;
+import com.tcc.e_language_api.web.dto.mapper.AlunoProfessorMapper;
 import com.tcc.e_language_api.web.dto.mapper.PerfilIdiomaMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
@@ -24,6 +26,36 @@ public class PerfilIdiomaController {
         try {
             perfilIdiomaService.create(PerfilIdiomaMapper.toEntity(dto));
             return ResponseEntity.status(HttpStatus.CREATED).body("Perfil vinculado com idioma com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable UUID id) {
+        try{
+            perfilIdiomaService.delete(id); ;
+            return ResponseEntity.status(HttpStatus.OK).body("vinculo excluido com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable UUID id) {
+        try{
+            PerfilIdioma perfilIdioma = perfilIdiomaService.getById(id); ;
+            return ResponseEntity.status(HttpStatus.OK).body(PerfilIdiomaMapper.toDto(perfilIdioma));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{perfilId}/perfil")
+    public ResponseEntity<?> getAll(@PathVariable UUID perfilId) {
+        try{
+            List<PerfilIdioma> perfilIdioma = perfilIdiomaService.getByPerfil(perfilId); ;
+            return ResponseEntity.status(HttpStatus.OK).body(PerfilIdiomaMapper.toListDto(perfilIdioma));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

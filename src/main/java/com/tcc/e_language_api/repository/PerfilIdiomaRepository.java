@@ -19,4 +19,6 @@ public interface PerfilIdiomaRepository extends JpaRepository<PerfilIdioma, UUID
             "WHERE i.nome = :idioma_nome AND pi.perfil_id = :perfil_id",
             nativeQuery = true)
     PerfilIdioma findByIdiomaAndPerfil(@Param("idioma_nome") String idioma, @Param("perfil_id") UUID perfilId);
+
+    List<PerfilIdioma> findByPerfilPerfilId(@Param("perfil_id") UUID perfilId);
 }

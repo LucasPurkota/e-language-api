@@ -45,4 +45,10 @@ public class AvaliacaoService {
 
         avaliacaoRepository.save(avaliacao);
     }
+
+    //corrigir
+    //salvarresposta
+    //delete
+    //getbyid
+    //getbyunidade
 }

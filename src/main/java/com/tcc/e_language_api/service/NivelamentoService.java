@@ -60,4 +60,9 @@ public class NivelamentoService {
     public Nivelamento getNivelamentoPendente(UUID perfilId, String idioma) {
         return nivelamentoRepository.findNivelamentoPendente(idioma, perfilId);
     }
+
+    //corrigir
+    //salvarresposta
+    //getbyid
+    //getbyperfil
 }

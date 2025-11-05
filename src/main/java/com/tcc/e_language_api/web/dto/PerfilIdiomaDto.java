@@ -10,6 +10,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class PerfilIdiomaDto {
+    private UUID perfilIdiomaId;
     private UUID perfilId;
     private UUID idiomaId;
     private int nivelIdiomaId;

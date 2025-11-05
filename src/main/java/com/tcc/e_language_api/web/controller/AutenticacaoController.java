@@ -4,6 +4,7 @@ import com.tcc.e_language_api.jwt.JwtToken;
 import com.tcc.e_language_api.jwt.JwtUserDetailsService;
 import com.tcc.e_language_api.web.dto.UsuarioLoginDto;
 
+import com.tcc.e_language_api.web.exception.ErrorMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -72,7 +74,7 @@ public class AutenticacaoController {
         }
         return ResponseEntity
                 .badRequest()
-                .body( "Credenciais Inválidas");
+                .body(new ErrorMessage(request, HttpStatus.UNAUTHORIZED, "Credenciais inválidas"));
     }
 
 }
