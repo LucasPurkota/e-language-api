@@ -7,7 +7,9 @@ import com.tcc.e_language_api.service.IdiomaService;
 import com.tcc.e_language_api.web.docs.IdiomaApiDocs;
 import com.tcc.e_language_api.web.dto.IdiomaDto;
 import com.tcc.e_language_api.web.dto.mapper.IdiomaMapper;
+import com.tcc.e_language_api.web.exception.ErrorMessage;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,27 +29,27 @@ public class IdiomaController {
     
     @PostMapping
     @IdiomaApiDocs.CreateIdioma
-    public ResponseEntity<String> create(@RequestBody @Valid IdiomaDto dto, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> create(@RequestBody @Valid IdiomaDto dto, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
         idiomaService.create(IdiomaMapper.toEntity(dto), userDetails.getRole());
-        return ResponseEntity.status(HttpStatus.CREATED).body("Idioma criado com sucesso!");
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorMessage(request, HttpStatus.CREATED, "idioma criado com sucesso!"));
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable UUID id, @RequestBody @Valid IdiomaDto dto, @AuthenticationPrincipal JwtUserDetails userDetails){
+    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody @Valid IdiomaDto dto, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request){
         try {
             idiomaService.update(id, dto, userDetails.getRole());
-            return ResponseEntity.status(HttpStatus.OK).body("Idioma alterado com sucesso!");
+            return ResponseEntity.status(HttpStatus.OK).body(new ErrorMessage(request, HttpStatus.OK, "idioma alterado com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable UUID id, @AuthenticationPrincipal JwtUserDetails userDetails){
+    public ResponseEntity<?> delete(@PathVariable UUID id, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request){
         try {
             idiomaService.delete(id, userDetails.getRole());
-            return ResponseEntity.status(HttpStatus.OK).body("Idioma alterado com sucesso!");
+            return ResponseEntity.status(HttpStatus.OK).body(new ErrorMessage(request, HttpStatus.CREATED, "idioma excluido com sucesso!"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

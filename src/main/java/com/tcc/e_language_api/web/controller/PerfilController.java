@@ -1,6 +1,7 @@
 package com.tcc.e_language_api.web.controller;
 
 import com.tcc.e_language_api.entity.Perfil;
+import com.tcc.e_language_api.jwt.JwtUserDetails;
 import com.tcc.e_language_api.service.PerfilService;
 import com.tcc.e_language_api.web.docs.PerfilApiDocs;
 import com.tcc.e_language_api.web.dto.PerfilDto;
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -64,6 +66,17 @@ public class PerfilController {
             List<Perfil> perfil = perfilService.getByTipoPerfil(tipoPerfilId);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(PerfilMapper.toResponseList(perfil));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/usuario/{tipoPerfil}/tipo-perfil")
+    public ResponseEntity<?> getById(@PathVariable String tipoPerfil, @AuthenticationPrincipal JwtUserDetails userDetails) {
+        try {
+            Perfil perfil = perfilService.getByUsuarioAndTipoPerfil(tipoPerfil, userDetails.getUsername());
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(PerfilMapper.toResponse(perfil));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

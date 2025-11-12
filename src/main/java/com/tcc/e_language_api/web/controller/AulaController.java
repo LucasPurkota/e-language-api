@@ -6,7 +6,9 @@ import com.tcc.e_language_api.service.AulaService;
 import com.tcc.e_language_api.web.docs.AulaApiDocs;
 import com.tcc.e_language_api.web.dto.AulaDto;
 import com.tcc.e_language_api.web.dto.mapper.AulaMapper;
+import com.tcc.e_language_api.web.exception.ErrorMessage;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +28,10 @@ public class AulaController {
 
     @PostMapping
     @AulaApiDocs.Create
-    public ResponseEntity<String> create(@RequestBody AulaDto aulaDTO, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> create(@RequestBody AulaDto aulaDTO, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
         try {
             aulaService.create(AulaMapper.toEntity(aulaDTO), userDetails.getRole());
-            return ResponseEntity.status(HttpStatus.CREATED).body("Aula criada com sucesso!");
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorMessage(request, HttpStatus.CREATED, "Unidade criada com sucesso!"));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (Exception e) {
@@ -38,10 +40,10 @@ public class AulaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable UUID id, @RequestBody AulaDto dto, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody AulaDto dto, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
         try {
             aulaService.update(id, dto, userDetails.getRole());
-            return ResponseEntity.status(HttpStatus.CREATED).body("Aula atualizado!");
+            return ResponseEntity.status(HttpStatus.OK).body(new ErrorMessage(request, HttpStatus.OK, "Aula atualizada com sucesso!"));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (Exception e) {
@@ -50,10 +52,10 @@ public class AulaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable UUID id, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> delete(@PathVariable UUID id, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
         try {
             aulaService.delete(id, userDetails.getRole());
-            return ResponseEntity.status(HttpStatus.CREATED).body("Aula deletada com sucesso!");
+            return ResponseEntity.status(HttpStatus.OK).body(new ErrorMessage(request, HttpStatus.OK, "Aula deletada com sucesso!"));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (Exception e) {

@@ -38,4 +38,6 @@ public class PerfilIdioma {
                             "ON DELETE CASCADE ON UPDATE CASCADE"
             ))
     private NivelIdioma nivelIdioma;
+    @Column(name = "pontos_ranking", nullable = false)
+    private int pontosRanking;
 }

@@ -66,6 +66,12 @@ public class PerfilService {
     }
 
     @Transactional
+    public Perfil getByUsuarioAndTipoPerfil(String tipoPerfil, String usuario) {
+        return perfilRepository.findByTipoPerfilAndUsuario(tipoPerfil, usuario)
+                .orElseThrow(() -> new EntityNotFoundException("Perfil não encontrado"));
+    }
+
+    @Transactional
     public void delete(UUID id) {
         getById(id);
 

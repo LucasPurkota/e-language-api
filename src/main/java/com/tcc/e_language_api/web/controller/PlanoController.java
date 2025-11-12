@@ -21,21 +21,21 @@ import java.util.UUID;
 public class PlanoController {
     private final PlanoService planoService;
 
-    @PostMapping
-    public ResponseEntity<String> create(@RequestBody PlanoDto dto, @AuthenticationPrincipal JwtUserDetails userDetails) {
-        try{
-            planoService.create(PlanoMapper.toEntity(dto), userDetails.getRole()) ;
-            return ResponseEntity.status(HttpStatus.CREATED).body("Plano criado com sucesso!");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<String> update(@PathVariable UUID id, @RequestBody PlanoDto dto, @AuthenticationPrincipal JwtUserDetails userDetails) {
         try{
             planoService.update(id, dto, userDetails.getRole()); ;
             return ResponseEntity.status(HttpStatus.OK).body("Plano alterado com sucesso!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<String> create(@RequestBody PlanoDto dto, @AuthenticationPrincipal JwtUserDetails userDetails) {
+        try{
+            planoService.create(PlanoMapper.toEntity(dto), userDetails.getRole()) ;
+            return ResponseEntity.status(HttpStatus.CREATED).body("Plano criado com sucesso!");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

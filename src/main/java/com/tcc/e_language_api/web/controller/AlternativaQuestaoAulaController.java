@@ -6,7 +6,9 @@ import com.tcc.e_language_api.service.AlternativaQuestaoAulaService;
 import com.tcc.e_language_api.web.docs.AlternativaQuestaoAulaApiDocs;
 import com.tcc.e_language_api.web.dto.AlternativaQuestaoAulaDto;
 import com.tcc.e_language_api.web.dto.mapper.AlternativaQuestaoAulaMapper;
+import com.tcc.e_language_api.web.exception.ErrorMessage;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,37 +27,37 @@ public class AlternativaQuestaoAulaController {
 
     @PostMapping
     @AlternativaQuestaoAulaApiDocs.Create
-    public ResponseEntity<String> create(@RequestBody AlternativaQuestaoAulaDto dto, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> create(@RequestBody AlternativaQuestaoAulaDto dto, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
         try{
             alternativaQuestaoAulaService.create(AlternativaQuestaoAulaMapper.toEntity(dto), userDetails.getRole()) ;
-            return ResponseEntity.status(HttpStatus.CREATED).body("Alternativa questao aula criada com sucesso!");
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorMessage(request, HttpStatus.CREATED, "Alternativa criada com sucesso!"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable UUID id, @RequestBody AlternativaQuestaoAulaDto dto, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody AlternativaQuestaoAulaDto dto, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
         try{
             alternativaQuestaoAulaService.update(id, dto, userDetails.getRole()); ;
-            return ResponseEntity.status(HttpStatus.OK).body("Alternativa criada com sucesso");
+            return ResponseEntity.status(HttpStatus.OK).body(new ErrorMessage(request, HttpStatus.OK, "Alternativa alterada com sucesso!"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable UUID id, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> delete(@PathVariable UUID id, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
         try{
             alternativaQuestaoAulaService.delete(id, userDetails.getRole()); ;
-            return ResponseEntity.status(HttpStatus.OK).body("Alternativa deletada com sucesso");
+            return ResponseEntity.status(HttpStatus.OK).body(new ErrorMessage(request, HttpStatus.CREATED, "Alternativa deletada com sucesso!"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable UUID id) {
+    public ResponseEntity<?> getById(@PathVariable UUID id, HttpServletRequest request) {
         try{
             AlternativaQuestaoAula alternativaQuestaoAula = alternativaQuestaoAulaService.getById(id); ;
             return ResponseEntity.status(HttpStatus.OK).body(AlternativaQuestaoAulaMapper.toDto(alternativaQuestaoAula));
@@ -65,7 +67,7 @@ public class AlternativaQuestaoAulaController {
     }
 
     @GetMapping("/{questaoId}/questao")
-    public ResponseEntity<?> getByQuestao(@PathVariable UUID questaoId) {
+    public ResponseEntity<?> getByQuestao(@PathVariable UUID questaoId, HttpServletRequest request) {
         try{
             List<AlternativaQuestaoAula> alternativaQuestaoAula = alternativaQuestaoAulaService.getByQuestao(questaoId); ;
             return ResponseEntity.status(HttpStatus.OK).body(AlternativaQuestaoAulaMapper.toListDto(alternativaQuestaoAula));

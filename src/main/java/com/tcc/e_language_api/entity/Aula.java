@@ -23,12 +23,12 @@ public class Aula {
                     foreignKeyDefinition = "FOREIGN KEY (unidade_id) REFERENCES unidade (unidade_id) ON DELETE CASCADE ON UPDATE CASCADE"
             ))
     private Unidade unidade;
-    @Column(name = "numero", nullable = false, unique = true)
+    @Column(name = "numero", nullable = false)
     private int numero;
-    @Column(name = "titulo", nullable = false, unique = true)
+    @Column(name = "titulo", nullable = false)
     private String titulo;
-    @Column(name = "conteudo", nullable = false, unique = true)
+    @Column(name = "conteudo", nullable = false)
     private String conteudo;
-    @Column(name = "link_video", nullable = false, unique = true)
+    @Column(name = "link_video", nullable = false)
     private String linkVideo;
 }

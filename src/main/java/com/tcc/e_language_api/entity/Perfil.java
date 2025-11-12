@@ -29,6 +29,8 @@ public class Perfil {
                     foreignKeyDefinition = "FOREIGN KEY (tipo_perfil_id) REFERENCES tipo_perfil (tipo_perfil_id) ON DELETE CASCADE ON UPDATE CASCADE"
             ))
     private TipoPerfil tipoPerfil;
-    @Column(name = "postos_ranking")
+    @Column(name = "pontos_ranking")
     private Double pontosRanking;
+    @Transient
+    private int posicaoRanking;
 }

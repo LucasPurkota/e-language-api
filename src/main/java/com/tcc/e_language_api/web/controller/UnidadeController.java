@@ -6,10 +6,13 @@ import com.tcc.e_language_api.service.UnidadeService;
 import com.tcc.e_language_api.web.docs.UnidadeApiDocs;
 import com.tcc.e_language_api.web.dto.UnidadeDto;
 import com.tcc.e_language_api.web.dto.mapper.UnidadeMapper;
+import com.tcc.e_language_api.web.exception.ErrorMessage;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,10 +30,10 @@ public class UnidadeController {
 
     @PostMapping
     @UnidadeApiDocs.CreateUnidade
-    public ResponseEntity<String> create(@RequestBody UnidadeDto unidadeDto, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> create(@RequestBody UnidadeDto unidadeDto, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
         try {
             unidadeService.create(UnidadeMapper.toEntity(unidadeDto), userDetails.getRole());
-            return ResponseEntity.status(HttpStatus.CREATED).body("Unidade criada com sucesso!");
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorMessage(request, HttpStatus.CREATED, "Unidade criada com sucesso!"));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (Exception e) {
@@ -39,20 +42,20 @@ public class UnidadeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable UUID id, @RequestBody UnidadeDto dto, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody UnidadeDto dto, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
         try {
             unidadeService.update(id, dto, userDetails.getRole());
-            return ResponseEntity.ok("Unidade alterada com sucesso!");
+            return ResponseEntity.ok(new ErrorMessage(request, HttpStatus.CREATED, "Unidade alterada com sucesso!"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable UUID id, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> delete(@PathVariable UUID id, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
         try {
             unidadeService.delete(id, userDetails.getRole());
-            return ResponseEntity.ok("Unidade deletada com sucesso!");
+            return ResponseEntity.ok(new ErrorMessage(request, HttpStatus.CREATED, "Unidade deletada com sucesso!"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

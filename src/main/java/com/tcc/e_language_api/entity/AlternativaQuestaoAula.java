@@ -24,8 +24,8 @@ public class AlternativaQuestaoAula {
                             "ON DELETE CASCADE ON UPDATE CASCADE"
             ))
     private QuestaoAula questaoAula;
-    @Column(name = "alternativa", nullable = false, unique = true)
+    @Column(name = "alternativa", nullable = false)
     private String alternativa;
-    @Column(name = "descricao", nullable = false, unique = true)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 }

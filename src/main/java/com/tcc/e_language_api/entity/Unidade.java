@@ -29,10 +29,10 @@ public class Unidade {
                     foreignKeyDefinition = "FOREIGN KEY (nivel_idioma_id) REFERENCES nivel_idioma (nivel_idioma_id) ON DELETE CASCADE ON UPDATE CASCADE"
             ))
     private NivelIdioma nivelIdioma;
-    @Column(name = "numero", nullable = false, unique = true)
+    @Column(name = "numero", nullable = false)
     private int numero;
-    @Column(name = "titulo", nullable = false, unique = true)
+    @Column(name = "titulo", nullable = false)
     private String titulo;
-    @Column(name = "conteudo", nullable = false, unique = true)
+    @Column(name = "conteudo", nullable = false)
     private String conteudo;
 }
