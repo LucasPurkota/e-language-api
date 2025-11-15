@@ -47,4 +47,6 @@ public class QuestaoPersonalizada {
     private String gabarito;
     @Column(name = "resposta")
     private String resposta;
+    @Column(name = "correto", length = 1)
+    private String correto;
 }

@@ -26,10 +26,18 @@ public class Avaliacao {
                             "ON DELETE CASCADE ON UPDATE CASCADE"
             ))
     private AlunoUnidade alunoUnidade;
+    @ManyToOne
+    @JoinColumn(name = "status_id",
+            foreignKey = @ForeignKey(name = "avaliacao_fk2",
+                    foreignKeyDefinition = "FOREIGN KEY (status_id) REFERENCES status (status_id) ON DELETE CASCADE ON UPDATE CASCADE"
+            ))
+    private Status status;
     @Column(name = "nota")
     private int nota;
     @Column(name = "data_realizacao")
     private LocalDateTime dataRealizacao;
     @OneToMany(mappedBy = "avaliacao",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AvaliacaoQuestaoAula> avaliacaoQuestaoAula;
+    @Column(name = "aprovado", length = 1)
+    private String aprovado;
 }

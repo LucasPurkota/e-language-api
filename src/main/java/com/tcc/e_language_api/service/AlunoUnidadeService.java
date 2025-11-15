@@ -36,4 +36,10 @@ public class AlunoUnidadeService {
     public List<AlunoUnidade> getAll() {
         return alunoUnidadeRepository.findAll();
     }
+
+    @Transactional
+    public AlunoUnidade getByAlunoAndUnidade(UUID alunoId, UUID unidadeId) {
+        return alunoUnidadeRepository.findByAlunoAndUnidade(alunoId, unidadeId)
+                .orElseThrow(() -> new RuntimeException("Aluno Unidade not found"));
+    }
 }

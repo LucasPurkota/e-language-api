@@ -20,6 +20,10 @@ public class PerfilMapper {
             response.setTipoPerfilId(entity.getTipoPerfil().getTipoPerfilId());
             response.setTipoPerfilDescricao(entity.getTipoPerfil().getDescricao());
         }
+
+        if (entity.getUsuario() != null) {
+            response.setNome(entity.getUsuario().getNome());
+        }
         
         return response;
     }

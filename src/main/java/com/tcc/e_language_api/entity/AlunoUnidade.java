@@ -29,4 +29,11 @@ public class AlunoUnidade {
                             "ON DELETE CASCADE ON UPDATE CASCADE"
             ))
     private Unidade unidade;
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false,
+            foreignKey = @ForeignKey(name = "aluno_unidade_fk3",
+                    foreignKeyDefinition = "FOREIGN KEY (status_id) REFERENCES status (status_id) " +
+                            "ON DELETE CASCADE ON UPDATE CASCADE"
+            ))
+    private Status status;
 }

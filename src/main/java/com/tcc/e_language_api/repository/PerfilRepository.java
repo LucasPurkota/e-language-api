@@ -33,7 +33,7 @@ public interface PerfilRepository extends JpaRepository<Perfil, UUID> {
             nativeQuery = true)
     List<Object[]> findRanking();
 
-    @Query(value = "SELECT u.nome, p.pontos_ranking, ROW_NUMBER() OVER (ORDER BY p.pontos_ranking DESC) as posicao_ranking FROM perfil p " +
+    @Query(value = "SELECT u.nome, pi.pontos_ranking, ROW_NUMBER() OVER (ORDER BY pi.pontos_ranking DESC) as posicao_ranking FROM perfil p " +
             "LEFT JOIN public.usuario u ON u.usuario_id = p.usuario_id " +
             "LEFT JOIN public.perfil_idioma pi ON pi.perfil_id = p.perfil_id " +
             "LEFT JOIN public.idioma i ON i.idioma_id = pi.idioma_id " +

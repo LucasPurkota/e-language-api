@@ -1,10 +1,13 @@
 package com.tcc.e_language_api.web.controller;
 
 import com.tcc.e_language_api.entity.QuestaoAula;
+import com.tcc.e_language_api.entity.RespostaQuestaoAula;
 import com.tcc.e_language_api.jwt.JwtUserDetails;
 import com.tcc.e_language_api.service.QuestaoAulaService;
 import com.tcc.e_language_api.web.dto.QuestaoAulaDto;
+import com.tcc.e_language_api.web.dto.RespostaQuestaoAulaDto;
 import com.tcc.e_language_api.web.dto.mapper.QuestaoAulaMapper;
+import com.tcc.e_language_api.web.dto.mapper.RespostaQuestaoAulaMapper;
 import com.tcc.e_language_api.web.exception.ErrorMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -83,6 +86,18 @@ public class QuestaoAulaController {
             List<QuestaoAula> questaoAula = questaoAulaService.getAll();
 
             return ResponseEntity.status(HttpStatus.OK).body(QuestaoAulaMapper.toListDto(questaoAula));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+        }
+    }
+
+    @PutMapping("/corrigir/{unidadeId}")
+    public ResponseEntity<?> corrigirQuestaoAula(@PathVariable UUID unidadeId, @RequestBody List<RespostaQuestaoAulaDto> dto,
+                                                 @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
+        try{
+            List<RespostaQuestaoAula> respostas = questaoAulaService.corrigirAtividades(dto, unidadeId, userDetails.getUsername());
+
+            return ResponseEntity.status(HttpStatus.OK).body(RespostaQuestaoAulaMapper.toListDto(respostas));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
         }

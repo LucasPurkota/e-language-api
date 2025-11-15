@@ -32,4 +32,6 @@ public class NivelamentoQuestaoAula {
     private QuestaoAula questaoAula;
     @Column(name = "resposta")
     private String resposta;
+    @Column(name = "correto", length = 1)
+    private String correto;
 }

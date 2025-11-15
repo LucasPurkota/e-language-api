@@ -1,14 +1,15 @@
 package com.tcc.e_language_api.service;
 
-import com.tcc.e_language_api.entity.NivelDificuldade;
-import com.tcc.e_language_api.entity.QuestaoAula;
-import com.tcc.e_language_api.entity.TipoQuestao;
+import com.tcc.e_language_api.entity.*;
 import com.tcc.e_language_api.repository.QuestaoAulaRepository;
+import com.tcc.e_language_api.repository.RespostaQuestaoAulaRepository;
 import com.tcc.e_language_api.web.dto.QuestaoAulaDto;
+import com.tcc.e_language_api.web.dto.RespostaQuestaoAulaDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +18,11 @@ import java.util.UUID;
 @Service
 public class QuestaoAulaService {
     private final QuestaoAulaRepository questaoAulaRepository;
+    private final RespostaQuestaoAulaRepository respostaQuestaoAulaRepository;
+    private final PerfilService perfilService;
+    private final AlunoUnidadeService alunoUnidadeService;
+    private final UnidadeService unidadeService;
+    private final PerfilIdiomaService perfilIdiomaService;
 
     @Transactional
     public void create(QuestaoAula questaoAula, List<String> tipoPerfil){
@@ -72,5 +78,43 @@ public class QuestaoAulaService {
     @Transactional
     public List<QuestaoAula> getAll() {
         return questaoAulaRepository.findAll();
+    }
+    
+    @Transactional
+    public List<RespostaQuestaoAula> corrigirAtividades(List<RespostaQuestaoAulaDto> listDto, UUID unidadeId, String usuario) {
+        List <RespostaQuestaoAula> listRespQuestAula = new ArrayList<>();
+        Double pontos = 0.0;
+
+        Perfil perfil = perfilService.getByUsuarioAndTipoPerfil("Aluno", usuario);
+        AlunoUnidade alunoUnidade = alunoUnidadeService.getByAlunoAndUnidade(perfil.getPerfilId(), unidadeId);
+        for (RespostaQuestaoAulaDto dto : listDto) {
+            RespostaQuestaoAula respQuestAula = new RespostaQuestaoAula();
+            QuestaoAula questaoAula = new QuestaoAula();
+            questaoAula.setQuestaoAulaId(dto.getQuestaoAulaId());
+            respQuestAula.setQuestaoAula(questaoAula);
+            respQuestAula.setAlunoUnidade(alunoUnidade);
+            respQuestAula.setResposta(dto.getResposta());
+            if (dto.getResposta().equals(dto.getGabarito())) {
+                pontos += 2;
+                respQuestAula.setCorreto("S");
+            } else {
+                pontos -= 2;
+                respQuestAula.setCorreto("N");
+            }
+            respostaQuestaoAulaRepository.save(respQuestAula);
+            listRespQuestAula.add(respQuestAula);
+        }
+
+        Double pontosGeral = pontos + perfil.getPontosRanking();
+        perfil.setPontosRanking(pontosGeral);
+
+        Unidade unidade = unidadeService.getById(unidadeId);
+
+        PerfilIdioma perfilIdioma = perfilIdiomaService.getByPerfilAndIdioma(perfil.getPerfilId(), unidade.getIdioma().getIdiomaId());
+
+        Double pontosIdioma = pontos + perfilIdioma.getPontosRanking();
+        perfilIdioma.setPontosRanking(pontosIdioma);
+
+        return listRespQuestAula;
     }
 }

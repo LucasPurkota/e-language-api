@@ -55,4 +55,10 @@ public class PerfilIdiomaService {
         return perfilIdiomaRepository.findByPerfilPerfilId(perfilId);
     }
 
+    @Transactional
+    public PerfilIdioma getByPerfilAndIdioma(UUID perfilId, UUID idiomaId) {
+        return perfilIdiomaRepository.findByPerfilAndIdioma(idiomaId, perfilId)
+                .orElseThrow(() -> new RuntimeException("Aluno Unidade not found"));
+    }
+
 }

@@ -43,4 +43,6 @@ public class Nivelamento {
     private Status status;
     @OneToMany(mappedBy = "nivelamento",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<NivelamentoQuestaoAula> nivelamentoQuestaoAulas;
+    @Column(name = "aprovado", length = 1)
+    private String aprovado;
 }

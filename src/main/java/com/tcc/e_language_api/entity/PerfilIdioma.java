@@ -39,5 +39,5 @@ public class PerfilIdioma {
             ))
     private NivelIdioma nivelIdioma;
     @Column(name = "pontos_ranking", nullable = false)
-    private int pontosRanking;
+    private Double pontosRanking;
 }

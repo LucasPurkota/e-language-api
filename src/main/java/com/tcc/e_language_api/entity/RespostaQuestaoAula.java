@@ -33,4 +33,6 @@ public class RespostaQuestaoAula {
     private QuestaoAula questaoAula;
     @Column(name = "resposta", nullable = false)
     private String resposta;
+    @Column(name = "correto", length = 1)
+    private String correto;
 }

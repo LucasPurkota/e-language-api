@@ -61,7 +61,7 @@ public class PerfilController {
     }
 
     @GetMapping("/{tipoPerfilId}/tipo-perfil")
-    public ResponseEntity<?> getById(@PathVariable int tipoPerfilId) {
+    public ResponseEntity<?> getByTipoPerfil(@PathVariable int tipoPerfilId) {
         try {
             List<Perfil> perfil = perfilService.getByTipoPerfil(tipoPerfilId);
             return ResponseEntity.status(HttpStatus.OK)
@@ -72,7 +72,7 @@ public class PerfilController {
     }
 
     @GetMapping("/usuario/{tipoPerfil}/tipo-perfil")
-    public ResponseEntity<?> getById(@PathVariable String tipoPerfil, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> getByUser(@PathVariable String tipoPerfil, @AuthenticationPrincipal JwtUserDetails userDetails) {
         try {
             Perfil perfil = perfilService.getByUsuarioAndTipoPerfil(tipoPerfil, userDetails.getUsername());
             return ResponseEntity.status(HttpStatus.OK)
