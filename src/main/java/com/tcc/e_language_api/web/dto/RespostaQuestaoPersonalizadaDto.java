@@ -9,8 +9,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RespostaQuestaoAulaDto {
-    private UUID questaoAulaId;
+public class RespostaQuestaoPersonalizadaDto {
+    private UUID questaoPersonalizadaId;
     private String gabarito;
     private String resposta;
 }

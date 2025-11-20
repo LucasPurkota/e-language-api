@@ -1,16 +1,14 @@
 package com.tcc.e_language_api.web.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class RespostaQuestaoAulaDto {
-    private UUID questaoAulaId;
+public class NivelamentoRespostaDto {
+    private UUID nivelamentoQuestaoAulaId;
     private String gabarito;
     private String resposta;
 }

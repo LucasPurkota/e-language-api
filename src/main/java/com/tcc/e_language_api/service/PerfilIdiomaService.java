@@ -35,6 +35,7 @@ public class PerfilIdiomaService {
                 alunoUnidadeService.create(alunoUnidade);
             }
         }
+        perfilIdioma.setPontosRanking(0.0);
         perfilIdiomaRepository.save(perfilIdioma);
     }
 
@@ -58,7 +59,7 @@ public class PerfilIdiomaService {
     @Transactional
     public PerfilIdioma getByPerfilAndIdioma(UUID perfilId, UUID idiomaId) {
         return perfilIdiomaRepository.findByPerfilAndIdioma(idiomaId, perfilId)
-                .orElseThrow(() -> new RuntimeException("Aluno Unidade not found"));
+                .orElseThrow(() -> new RuntimeException("Aluno Idioma not found"));
     }
 
 }

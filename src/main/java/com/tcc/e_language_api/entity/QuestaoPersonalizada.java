@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -43,10 +44,18 @@ public class QuestaoPersonalizada {
                     foreignKeyDefinition = "FOREIGN KEY (tipo_questao_id) REFERENCES tipo_questao (tipo_questao_id) ON DELETE CASCADE ON UPDATE CASCADE"
             ))
     private TipoQuestao tipoQuestao;
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false,
+            foreignKey = @ForeignKey(name = "questao_personalizada_fk5",
+                    foreignKeyDefinition = "FOREIGN KEY (status_id) REFERENCES status (status_id) ON DELETE CASCADE ON UPDATE CASCADE"
+            ))
+    private Status status;
     @Column(name = "gabarito", nullable = false)
     private String gabarito;
     @Column(name = "resposta")
     private String resposta;
     @Column(name = "correto", length = 1)
     private String correto;
+    @OneToMany(mappedBy = "questaoPersonalizada",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AlternativaQuestaoPersonalizada> alternativas;
 }

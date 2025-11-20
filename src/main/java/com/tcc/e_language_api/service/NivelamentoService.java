@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.UUID;
 
 import com.tcc.e_language_api.entity.*;
+import com.tcc.e_language_api.exception.EntityNotFoundException;
 import com.tcc.e_language_api.repository.*;
+import com.tcc.e_language_api.web.dto.NivelamentoRespostaDto;
+import com.tcc.e_language_api.web.dto.RespostaQuestaoAulaDto;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -17,9 +20,10 @@ import lombok.RequiredArgsConstructor;
 public class NivelamentoService {
     private final NivelamentoRepository nivelamentoRepository;
     private final QuestaoAulaRepository questaoAulaRepository;
-    private final PerfilRepository perfilRepository;
-    private final IdiomaRepository idiomaRepository;
     private final PerfilIdiomaRepository perfilIdiomaRepository;
+    private final PerfilIdiomaService perfilIdiomaService;
+    private final NivelamentoQuestaoAulaRepository nivelamentoQuestaoAulaRepository;
+    private final PerfilService perfilService;
 
     @Transactional
     public void create(String idioma, UUID perfilId) {
@@ -59,6 +63,66 @@ public class NivelamentoService {
     @Transactional
     public Nivelamento getNivelamentoPendente(UUID perfilId, String idioma) {
         return nivelamentoRepository.findNivelamentoPendente(idioma, perfilId);
+    }
+
+    @Transactional
+    public Nivelamento getById(UUID nivelamentoId) {
+        return nivelamentoRepository.findById(nivelamentoId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Nivelamento com id %s não encontrado", nivelamentoId)));
+    }
+
+    @Transactional
+    public List<NivelamentoQuestaoAula> corrigir(UUID nivelamentoId, UUID perfilIdiomaId,  List<NivelamentoRespostaDto> respostas) {
+        List<NivelamentoQuestaoAula> listNivelamentoQuestaoAula = new ArrayList<>();
+        Double pontos = 0.0;
+        int acertos = 0;
+
+        for (NivelamentoRespostaDto resposta : respostas) {
+            NivelamentoQuestaoAula nivelamentoQuestaoAula = nivelamentoQuestaoAulaRepository.findById(resposta.getNivelamentoQuestaoAulaId())
+                    .orElseThrow(() -> new EntityNotFoundException(String.format("Nivelamento Questao Aula com id %s não encontrado", resposta.getNivelamentoQuestaoAulaId())));
+            nivelamentoQuestaoAula.setResposta(resposta.getResposta());
+            if (resposta.getResposta().equals(resposta.getGabarito())) {
+                pontos += 2;
+                acertos++;
+                nivelamentoQuestaoAula.setCorreto("S");
+            } else {
+                pontos -= 2;
+                nivelamentoQuestaoAula.setCorreto("N");
+            }
+            listNivelamentoQuestaoAula.add(nivelamentoQuestaoAula);
+        }
+
+        PerfilIdioma perfilIdioma = perfilIdiomaService.getById(perfilIdiomaId);
+
+        Double pontosIdioma = pontos + perfilIdioma.getPontosRanking();
+        perfilIdioma.setPontosRanking(pontosIdioma);
+
+        Perfil perfil = perfilService.getById(perfilIdioma.getPerfil().getPerfilId());
+
+        Double pontosGeral = pontos + perfil.getPontosRanking();
+        perfil.setPontosRanking(pontosGeral);
+
+        Nivelamento nivelamento = getById(nivelamentoId);
+        NivelIdioma nivelIdioma = new NivelIdioma();
+        if (acertos <= 9){
+            nivelIdioma.setNivelIdiomaId(1);
+            nivelamento.setNivelIdioma(nivelIdioma);
+            perfilIdioma.setNivelIdioma(nivelIdioma);
+        } else if (acertos <= 18){
+            nivelIdioma.setNivelIdiomaId(2);
+            nivelamento.setNivelIdioma(nivelIdioma);
+            perfilIdioma.setNivelIdioma(nivelIdioma);
+        } else {
+            nivelIdioma.setNivelIdiomaId(3);
+            nivelamento.setNivelIdioma(nivelIdioma);
+            perfilIdioma.setNivelIdioma(nivelIdioma);
+        }
+
+        Status status = new Status();
+        status.setStatusId(3);
+        nivelamento.setStatus(status);
+
+        return listNivelamentoQuestaoAula;
     }
 
     //corrigir

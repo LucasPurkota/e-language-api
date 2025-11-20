@@ -34,7 +34,7 @@ public class PerfilIdiomaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable UUID id) {
         try{
-            perfilIdiomaService.delete(id); ;
+            perfilIdiomaService.delete(id);
             return ResponseEntity.status(HttpStatus.OK).body("vinculo excluido com sucesso!");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

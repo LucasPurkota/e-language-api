@@ -33,7 +33,7 @@ public class Avaliacao {
             ))
     private Status status;
     @Column(name = "nota")
-    private int nota;
+    private Double nota;
     @Column(name = "data_realizacao")
     private LocalDateTime dataRealizacao;
     @OneToMany(mappedBy = "avaliacao",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
