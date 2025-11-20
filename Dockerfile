@@ -4,17 +4,19 @@
 # EXPOSE 8080
 # ENTRYPOINT ["java", "-jar", "app.jar"]
 
-FROM eclipse-temurin:17-jdk-alpine
+FROM ubuntu:latest AS build
 
-WORKDIR /app
+RUN apt-get update
+RUN apt-get install openjdk-17-jdk -y
+COPY . .
 
-COPY target/*.jar app.jar
+RUN apt-get install maven -y
+RUN mvn clean install
 
-# Render usa PORT automático, mas expomos 8080 também
+FROM openjdk:17-jdk-slim
+
 EXPOSE 8080
 
-# Health check obrigatório
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit 1
+COPY --from=build /target/e-language-api-0.0.1-SNAPSHOT.jar app.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
