@@ -11,11 +11,15 @@ spring.datasource.password=eNLi0Q24PGvd8H98XcdWt5FtT4jRUkhF
 spring.datasource.driver-class-name=org.postgresql.Driver
 
 # JPA
-spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.generate-ddl=true
 spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=false
-spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
+
+spring.sql.init.mode=always
+
+spring.datasource.initialization-mode=always
 
 # Server port (opcional - padrÃ£o Ã© 8080)
 server.port=8080

@@ -4,13 +4,10 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
+import java.sql.Connection;
+import java.sql.Statement;
 
 @Configuration
 public class ForceDataSourceConfig {
@@ -24,46 +21,27 @@ public class ForceDataSourceConfig {
 
         System.out.println("🚀 FORÇANDO DATASOURCE: " + url);
 
-        return DataSourceBuilder.create()
+        DataSource dataSource = DataSourceBuilder.create()
                 .url(url)
                 .username(username)
                 .password(password)
                 .driverClassName("org.postgresql.Driver")
                 .build();
+
+        // Forçar inicialização do Hibernate
+        forceHibernateDDL(dataSource);
+
+        return dataSource;
     }
 
-    @Bean
-    @Primary
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan("com.tcc.e_language_api.model"); // Ajuste para seu pacote de entidades
-
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-
-        HashMap<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto", "update"); // ou "create" para recriar sempre
-        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        properties.put("hibernate.show_sql", "true");
-        properties.put("hibernate.format_sql", "true");
-        properties.put("hibernate.jdbc.lob.non_contextual_creation", "true");
-
-        // Forçar criação do schema
-        properties.put("hibernate.hbm2ddl.auto", "create-drop"); // Use "create-drop" para desenvolvimento
-        // Ou use "update" para produção:
-        // properties.put("hibernate.hbm2ddl.auto", "update");
-
-        em.setJpaPropertyMap(properties);
-
-        return em;
-    }
-
-    @Bean
-    @Primary
-    public PlatformTransactionManager transactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-        return transactionManager;
+    private void forceHibernateDDL(DataSource dataSource) {
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement()) {
+            // Isso força a inicialização do pool e do Hibernate
+            stmt.execute("SELECT 1");
+            System.out.println("✅ DataSource inicializado com sucesso!");
+        } catch (Exception e) {
+            System.err.println("❌ Erro ao inicializar DataSource: " + e.getMessage());
+        }
     }
 }
