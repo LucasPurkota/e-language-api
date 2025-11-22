@@ -4,6 +4,7 @@ import com.tcc.e_language_api.entity.AlunoUnidade;
 import com.tcc.e_language_api.entity.Perfil;
 import com.tcc.e_language_api.entity.PerfilIdioma;
 import com.tcc.e_language_api.entity.Unidade;
+import com.tcc.e_language_api.entity.Status;
 import com.tcc.e_language_api.repository.PerfilIdiomaRepository;
 import com.tcc.e_language_api.repository.PerfilRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,9 @@ public class PerfilIdiomaService {
                 alunoUnidade.setUnidade(unidade);
                 alunoUnidade.setAluno(perfil);
 
+                Status statusUnidade = new Status();
+                statusUnidade.setStatusId(1);
+                alunoUnidade.setStatus(statusUnidade);
                 alunoUnidadeService.create(alunoUnidade);
             }
         }

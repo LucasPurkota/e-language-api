@@ -19,6 +19,7 @@ public class QuestaoPersonalizadaDto {
     private String enunciado;
     private int tipoQuestaoId;
     private String gabarito;
+    private String resposta;
     private String correto;
     private int statusId;
     private String status;
