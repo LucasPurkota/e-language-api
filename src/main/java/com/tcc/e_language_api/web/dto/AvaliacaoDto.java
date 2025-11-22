@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -14,6 +14,10 @@ import java.util.UUID;
 public class AvaliacaoDto {
     private UUID avaliacaoId;
     private UUID alunoUnidadeId;
-    private String nota;
+    private Double nota;
     private LocalDateTime dataRealizacao;
+    private String aprovado;
+    private String statusDescricao;
+    private int statusId;
+    private List<AvaliacaoQuestaoAulaDto> questoes;
 }

@@ -38,7 +38,14 @@ public interface PerfilRepository extends JpaRepository<Perfil, UUID> {
             "LEFT JOIN public.perfil_idioma pi ON pi.perfil_id = p.perfil_id " +
             "LEFT JOIN public.idioma i ON i.idioma_id = pi.idioma_id " +
             "WHERE p.tipo_perfil_id = 1 AND i.nome = :idioma " +
-            "ORDER BY p.pontos_ranking DESC;",
+            "ORDER BY pi.pontos_ranking DESC;",
             nativeQuery = true)
     List<Object[]> findRankingByIdioma(@Param("idioma") String idioma);
+
+    @Query(value = "SELECT posicao_ranking FROM (" +
+            "SELECT p.perfil_id, ROW_NUMBER() OVER (ORDER BY p.pontos_ranking DESC) as posicao_ranking " +
+            "FROM perfil p )" +
+            "AS ranked WHERE ranked.perfil_id = :perfilId",
+            nativeQuery = true)
+    Integer findPosicaoRanking(@Param("perfilId") UUID perfilId);
 }

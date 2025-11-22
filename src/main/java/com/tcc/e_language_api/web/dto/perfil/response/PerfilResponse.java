@@ -1,10 +1,12 @@
 package com.tcc.e_language_api.web.dto.perfil.response;
 
+import com.tcc.e_language_api.web.dto.PerfilIdiomaDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -24,4 +26,7 @@ public class PerfilResponse {
 
     @Schema(description = "Descrição do tipo de perfil", example = "ALUNO")
     private String tipoPerfilDescricao;
+
+    @Schema(description = "Posicao do ranking", example = "1")
+    private int posicaoRanking;
 }

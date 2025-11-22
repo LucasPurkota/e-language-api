@@ -34,7 +34,10 @@ public class PerfilIdiomaMapper {
         dto.setPerfilIdiomaId(perfilIdioma.getPerfilIdiomaId());
         dto.setPerfilId(perfilIdioma.getPerfil().getPerfilId());
         dto.setIdiomaId(perfilIdioma.getIdioma().getIdiomaId());
+        dto.setNomeIdioma(perfilIdioma.getIdioma().getNome());
         dto.setNivelIdiomaId(perfilIdioma.getNivelIdioma().getNivelIdiomaId());
+        dto.setNivelIdiomaDescricao(perfilIdioma.getNivelIdioma().getDescricao());
+        dto.setPosicaoRanking(perfilIdioma.getPosicaoRanking());
         return dto;
     }
 

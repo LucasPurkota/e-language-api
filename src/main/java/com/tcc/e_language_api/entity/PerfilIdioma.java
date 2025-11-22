@@ -40,4 +40,6 @@ public class PerfilIdioma {
     private NivelIdioma nivelIdioma;
     @Column(name = "pontos_ranking", nullable = false)
     private Double pontosRanking;
+    @Transient
+    private int posicaoRanking;
 }

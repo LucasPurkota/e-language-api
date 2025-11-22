@@ -13,5 +13,8 @@ public class PerfilIdiomaDto {
     private UUID perfilIdiomaId;
     private UUID perfilId;
     private UUID idiomaId;
+    private String nomeIdioma;
+    private int posicaoRanking;
     private int nivelIdiomaId;
+    private String nivelIdiomaDescricao;
 }

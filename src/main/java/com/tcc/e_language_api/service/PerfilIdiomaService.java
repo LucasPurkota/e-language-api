@@ -53,7 +53,18 @@ public class PerfilIdiomaService {
 
     @Transactional
     public List<PerfilIdioma> getByPerfil(UUID perfilId) {
-        return perfilIdiomaRepository.findByPerfilPerfilId(perfilId);
+        List<PerfilIdioma> perfilIdiomaList =  perfilIdiomaRepository.findByPerfilPerfilId(perfilId);
+
+        Perfil perfil = perfilService.getById(perfilId);
+
+        if (perfil.getTipoPerfil().getDescricao().equals("Aluno")) {
+            for (PerfilIdioma perfilIdioma : perfilIdiomaList) {
+                int posicao  = perfilIdiomaRepository.findPosicaoRanking(perfilIdioma.getPerfilIdiomaId());
+                perfilIdioma.setPosicaoRanking(posicao);
+            }
+        }
+
+        return perfilIdiomaList;
     }
 
     @Transactional

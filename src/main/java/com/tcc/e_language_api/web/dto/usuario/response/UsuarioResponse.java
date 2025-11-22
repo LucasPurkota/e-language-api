@@ -1,5 +1,6 @@
 package com.tcc.e_language_api.web.dto.usuario.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tcc.e_language_api.web.dto.endereco.response.EnderecoResponse;
 import com.tcc.e_language_api.web.dto.perfil.response.PerfilResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -7,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -30,7 +32,8 @@ public class UsuarioResponse {
     private String email;
     
     @Schema(description = "Data de criação do usuário")
-    private LocalDateTime criadoEm;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate criadoEm;
     
     @Schema(description = "Data da última atualização")
     private LocalDateTime atualizadoEm;

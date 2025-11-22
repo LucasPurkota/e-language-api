@@ -125,8 +125,4 @@ public class NivelamentoService {
         return listNivelamentoQuestaoAula;
     }
 
-    //corrigir
-    //salvarresposta
-    //getbyid
-    //getbyperfil
 }

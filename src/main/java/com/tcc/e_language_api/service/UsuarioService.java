@@ -1,8 +1,10 @@
 package com.tcc.e_language_api.service;
 
+import com.tcc.e_language_api.entity.Perfil;
 import com.tcc.e_language_api.entity.Usuario;
 import com.tcc.e_language_api.exception.EntityNotFoundException;
 import com.tcc.e_language_api.exception.UsernameUniqueViolationException;
+import com.tcc.e_language_api.repository.PerfilRepository;
 import com.tcc.e_language_api.repository.UsuarioRepository;
 import com.tcc.e_language_api.web.dto.UsuarioDto;
 import com.tcc.e_language_api.web.dto.mapper.UsuarioMapper;
@@ -20,6 +22,7 @@ import java.util.UUID;
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
+    private final PerfilRepository perfilRepository;
 
     @Transactional
     public Usuario create(Usuario usuario) {
@@ -104,6 +107,21 @@ public class UsuarioService {
     public Usuario getByEmail(String email) {
         return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Usuário com email '%s' não encontrado", email)));
+    }
+
+    @Transactional
+    public Usuario getUserLogado(String email) {
+        Usuario usuario = getByEmail(email);
+
+        Integer posicao = 0;
+        for (Perfil perfil : usuario.getPerfil()){
+            if (perfil.getTipoPerfil().getDescricao().equals("Aluno")) {
+                posicao = perfilRepository.findPosicaoRanking(perfil.getPerfilId());
+                perfil.setPosicaoRanking(posicao);
+            }
+        }
+
+        return usuario;
     }
 
     @Transactional
