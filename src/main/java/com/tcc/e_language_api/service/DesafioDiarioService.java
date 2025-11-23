@@ -78,6 +78,13 @@ public class DesafioDiarioService {
             desafioDiario.setStatus(status);
             desafioDiario.setResposta(resposta.getResposta());
         }
+
+        Double pontosGeral = perfil.getPontosRanking() + pontos;
+        Double pontosIdioma = perfilIdioma.getPontosRanking() + pontos;
+
+        perfil.setPontosRanking(pontosGeral);
+        perfilIdioma.setPontosRanking(pontosIdioma);
+
         return dtoList;
     }
 

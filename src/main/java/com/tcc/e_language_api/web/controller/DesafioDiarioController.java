@@ -34,7 +34,7 @@ public class DesafioDiarioController {
         }
     }
 
-    @PostMapping("corrigir/{perfilIdiomaId}/perfil-idioma")
+    @PutMapping("corrigir/{perfilIdiomaId}/perfil-idioma")
     public ResponseEntity<?> corrigir(@PathVariable UUID perfilIdiomaId, @RequestBody List<DesafioDiarioRespostaDto> respostas, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request){
         try {
             respostas = desafioDiarioService.corrigir(respostas,perfilIdiomaId,userDetails.getUsername());
