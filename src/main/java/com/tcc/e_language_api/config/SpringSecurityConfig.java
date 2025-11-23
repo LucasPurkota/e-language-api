@@ -1,6 +1,8 @@
 package com.tcc.e_language_api.config;
 
 import com.tcc.e_language_api.jwt.JwtAuthorizationFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -8,50 +10,47 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+@EnableWebSecurity
 @EnableMethodSecurity
 @EnableWebMvc
 @Configuration
 public class SpringSecurityConfig {
     
+    private static final Logger logger = LoggerFactory.getLogger(SpringSecurityConfig.class);
+    
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        logger.info("🔧 Configurando SecurityFilterChain...");
+        logger.info("🔓 Permitindo acesso público a: /api/reset-password, /api/ping, /api/test-public");
+        
         return http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .formLogin(form -> form.disable())
                 .httpBasic(basic -> basic.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Permitir todas as operações de usuários para teste
-                        .requestMatchers(HttpMethod.POST, "/api/v1/usuarios").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/usuarios").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/usuarios/**").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/usuarios/**").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/api/v1/usuarios/**").permitAll()
-                        .requestMatchers(HttpMethod.PATCH, "/api/v1/usuarios/**").permitAll()
-                        // Auth endpoints
-                        .requestMatchers(HttpMethod.POST, "/api/v1/auth").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/perfil").permitAll()
-                        // Swagger UI e OpenAPI endpoints
-                        .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("/swagger-ui.html").permitAll()
-                        .requestMatchers("/v3/api-docs/**").permitAll()
-                        .requestMatchers("/v3/api-docs").permitAll()
-                        .requestMatchers("/swagger-resources/**").permitAll()
-                        .requestMatchers("/webjars/**").permitAll()
-                        .requestMatchers("/configuration/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/reset-password/verify").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/reset-password/confirm").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/autenticacao/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/autenticacao/signup").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated()
                 ).sessionManagement(
                         session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                ).addFilterBefore(
+                )
+                .addFilterBefore(
                         jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class
-                ).build();
+                )
+                .build();
     }
 
     @Bean
@@ -67,6 +66,11 @@ public class SpringSecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
+    }
+    
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
     
     @Bean

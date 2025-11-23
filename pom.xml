@@ -46,6 +46,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		<!-- Removido spring-boot-starter-mail - usando Mailtrap API via RestTemplate -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
