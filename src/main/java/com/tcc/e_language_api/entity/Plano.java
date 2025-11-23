@@ -22,4 +22,6 @@ public class Plano {
     private String titulo;
     @Column(name = "descricao", nullable = false)
     private String descricao;
+    @Column(name = "valor", nullable = false)
+    private double valor;
 }

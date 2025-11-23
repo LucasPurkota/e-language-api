@@ -19,6 +19,7 @@ public class PlanoMapper {
         dto.setPlanoId(plano.getPlanoId());
         dto.setDescricao(plano.getDescricao());
         dto.setTitulo(plano.getTitulo());
+        dto.setValor(plano.getValor());
         return dto;
     }
 
