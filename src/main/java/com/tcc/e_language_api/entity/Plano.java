@@ -22,4 +22,10 @@ public class Plano {
     private String titulo;
     @Column(name = "descricao", nullable = false)
     private String descricao;
+    @ManyToOne
+    @JoinColumn(name = "forma_pagamento_id", nullable = false,
+            foreignKey = @ForeignKey(name = "plano_fk",
+                    foreignKeyDefinition = "FOREIGN KEY (forma_pagamento_id) REFERENCES forma_pagamento (forma_pagamento_id) ON DELETE CASCADE ON UPDATE CASCADE"
+            ))
+    private FormaPagamento formaPagamento;
 }
