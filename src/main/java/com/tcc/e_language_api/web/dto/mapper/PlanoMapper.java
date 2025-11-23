@@ -16,13 +16,7 @@ public class PlanoMapper {
     private static final ModelMapper mapper = new ModelMapper();
 
     public static Plano toEntity(PlanoDto dto) {
-        Plano response = mapper.map(dto, Plano.class);
-
-        FormaPagamento formaPagamento = new FormaPagamento();
-        formaPagamento.setFormaPagamentoId(dto.getFormaPagamentoId());
-
-        response.setFormaPagamento(formaPagamento);
-        return response;
+        return mapper.map(dto, Plano.class);
     }
 
     public static PlanoDto toDto(Plano plano){

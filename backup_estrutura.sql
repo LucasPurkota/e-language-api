@@ -35,7 +35,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: alternativa_questao_aula; Type: TABLE; Schema: public; Owner: e_language
+-- Name: alternativa_questao_aula; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.alternativa_questao_aula (
@@ -46,10 +46,10 @@ CREATE TABLE public.alternativa_questao_aula (
 );
 
 
-ALTER TABLE public.alternativa_questao_aula OWNER TO e_language;
+ALTER TABLE public.alternativa_questao_aula OWNER TO lucas_purkota;
 
 --
--- Name: alternativa_questao_personalizada; Type: TABLE; Schema: public; Owner: e_language
+-- Name: alternativa_questao_personalizada; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.alternativa_questao_personalizada (
@@ -60,10 +60,28 @@ CREATE TABLE public.alternativa_questao_personalizada (
 );
 
 
-ALTER TABLE public.alternativa_questao_personalizada OWNER TO e_language;
+ALTER TABLE public.alternativa_questao_personalizada OWNER TO lucas_purkota;
 
 --
--- Name: aluno_professor; Type: TABLE; Schema: public; Owner: e_language
+-- Name: aluno_plano; Type: TABLE; Schema: public; Owner: lucas_purkota
+--
+
+CREATE TABLE public.aluno_plano (
+    aluno_plano_id uuid NOT NULL,
+    cvc character varying(255) NOT NULL,
+    nome_cartao character varying(255) NOT NULL,
+    numero_cartao character varying(255) NOT NULL,
+    vencimento_cartao character varying(255) NOT NULL,
+    aluno_id uuid NOT NULL,
+    forma_pagamento_id integer NOT NULL,
+    plano_id uuid NOT NULL
+);
+
+
+ALTER TABLE public.aluno_plano OWNER TO lucas_purkota;
+
+--
+-- Name: aluno_professor; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.aluno_professor (
@@ -73,10 +91,10 @@ CREATE TABLE public.aluno_professor (
 );
 
 
-ALTER TABLE public.aluno_professor OWNER TO e_language;
+ALTER TABLE public.aluno_professor OWNER TO lucas_purkota;
 
 --
--- Name: aluno_unidade; Type: TABLE; Schema: public; Owner: e_language
+-- Name: aluno_unidade; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.aluno_unidade (
@@ -87,10 +105,10 @@ CREATE TABLE public.aluno_unidade (
 );
 
 
-ALTER TABLE public.aluno_unidade OWNER TO e_language;
+ALTER TABLE public.aluno_unidade OWNER TO lucas_purkota;
 
 --
--- Name: aula; Type: TABLE; Schema: public; Owner: e_language
+-- Name: aula; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.aula (
@@ -103,10 +121,10 @@ CREATE TABLE public.aula (
 );
 
 
-ALTER TABLE public.aula OWNER TO e_language;
+ALTER TABLE public.aula OWNER TO lucas_purkota;
 
 --
--- Name: avaliacao; Type: TABLE; Schema: public; Owner: e_language
+-- Name: avaliacao; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.avaliacao (
@@ -119,10 +137,10 @@ CREATE TABLE public.avaliacao (
 );
 
 
-ALTER TABLE public.avaliacao OWNER TO e_language;
+ALTER TABLE public.avaliacao OWNER TO lucas_purkota;
 
 --
--- Name: avaliacao_questao_aula; Type: TABLE; Schema: public; Owner: e_language
+-- Name: avaliacao_questao_aula; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.avaliacao_questao_aula (
@@ -134,10 +152,10 @@ CREATE TABLE public.avaliacao_questao_aula (
 );
 
 
-ALTER TABLE public.avaliacao_questao_aula OWNER TO e_language;
+ALTER TABLE public.avaliacao_questao_aula OWNER TO lucas_purkota;
 
 --
--- Name: avaliacao_satisfacao_professor; Type: TABLE; Schema: public; Owner: e_language
+-- Name: avaliacao_satisfacao_professor; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.avaliacao_satisfacao_professor (
@@ -148,10 +166,10 @@ CREATE TABLE public.avaliacao_satisfacao_professor (
 );
 
 
-ALTER TABLE public.avaliacao_satisfacao_professor OWNER TO e_language;
+ALTER TABLE public.avaliacao_satisfacao_professor OWNER TO lucas_purkota;
 
 --
--- Name: chat; Type: TABLE; Schema: public; Owner: e_language
+-- Name: chat; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.chat (
@@ -163,10 +181,10 @@ CREATE TABLE public.chat (
 );
 
 
-ALTER TABLE public.chat OWNER TO e_language;
+ALTER TABLE public.chat OWNER TO lucas_purkota;
 
 --
--- Name: desafio_diario; Type: TABLE; Schema: public; Owner: e_language
+-- Name: desafio_diario; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.desafio_diario (
@@ -180,10 +198,10 @@ CREATE TABLE public.desafio_diario (
 );
 
 
-ALTER TABLE public.desafio_diario OWNER TO e_language;
+ALTER TABLE public.desafio_diario OWNER TO lucas_purkota;
 
 --
--- Name: endereco; Type: TABLE; Schema: public; Owner: e_language
+-- Name: endereco; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.endereco (
@@ -202,10 +220,10 @@ CREATE TABLE public.endereco (
 );
 
 
-ALTER TABLE public.endereco OWNER TO e_language;
+ALTER TABLE public.endereco OWNER TO lucas_purkota;
 
 --
--- Name: forma_pagamento; Type: TABLE; Schema: public; Owner: e_language
+-- Name: forma_pagamento; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.forma_pagamento (
@@ -214,10 +232,10 @@ CREATE TABLE public.forma_pagamento (
 );
 
 
-ALTER TABLE public.forma_pagamento OWNER TO e_language;
+ALTER TABLE public.forma_pagamento OWNER TO lucas_purkota;
 
 --
--- Name: idioma; Type: TABLE; Schema: public; Owner: e_language
+-- Name: idioma; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.idioma (
@@ -227,10 +245,10 @@ CREATE TABLE public.idioma (
 );
 
 
-ALTER TABLE public.idioma OWNER TO e_language;
+ALTER TABLE public.idioma OWNER TO lucas_purkota;
 
 --
--- Name: nivel_dificuldade; Type: TABLE; Schema: public; Owner: e_language
+-- Name: nivel_dificuldade; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.nivel_dificuldade (
@@ -239,10 +257,10 @@ CREATE TABLE public.nivel_dificuldade (
 );
 
 
-ALTER TABLE public.nivel_dificuldade OWNER TO e_language;
+ALTER TABLE public.nivel_dificuldade OWNER TO lucas_purkota;
 
 --
--- Name: nivel_idioma; Type: TABLE; Schema: public; Owner: e_language
+-- Name: nivel_idioma; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.nivel_idioma (
@@ -251,10 +269,10 @@ CREATE TABLE public.nivel_idioma (
 );
 
 
-ALTER TABLE public.nivel_idioma OWNER TO e_language;
+ALTER TABLE public.nivel_idioma OWNER TO lucas_purkota;
 
 --
--- Name: nivelamento; Type: TABLE; Schema: public; Owner: e_language
+-- Name: nivelamento; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.nivelamento (
@@ -268,10 +286,10 @@ CREATE TABLE public.nivelamento (
 );
 
 
-ALTER TABLE public.nivelamento OWNER TO e_language;
+ALTER TABLE public.nivelamento OWNER TO lucas_purkota;
 
 --
--- Name: nivelamento_questao_aula; Type: TABLE; Schema: public; Owner: e_language
+-- Name: nivelamento_questao_aula; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.nivelamento_questao_aula (
@@ -283,10 +301,10 @@ CREATE TABLE public.nivelamento_questao_aula (
 );
 
 
-ALTER TABLE public.nivelamento_questao_aula OWNER TO e_language;
+ALTER TABLE public.nivelamento_questao_aula OWNER TO lucas_purkota;
 
 --
--- Name: perfil; Type: TABLE; Schema: public; Owner: e_language
+-- Name: perfil; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.perfil (
@@ -297,10 +315,10 @@ CREATE TABLE public.perfil (
 );
 
 
-ALTER TABLE public.perfil OWNER TO e_language;
+ALTER TABLE public.perfil OWNER TO lucas_purkota;
 
 --
--- Name: perfil_idioma; Type: TABLE; Schema: public; Owner: e_language
+-- Name: perfil_idioma; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.perfil_idioma (
@@ -312,24 +330,23 @@ CREATE TABLE public.perfil_idioma (
 );
 
 
-ALTER TABLE public.perfil_idioma OWNER TO e_language;
+ALTER TABLE public.perfil_idioma OWNER TO lucas_purkota;
 
 --
--- Name: plano; Type: TABLE; Schema: public; Owner: e_language
+-- Name: plano; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.plano (
     plano_id uuid NOT NULL,
     descricao character varying(255) NOT NULL,
-    titulo character varying(255) NOT NULL,
-    forma_pagamento_id integer NOT NULL
+    titulo character varying(255) NOT NULL
 );
 
 
-ALTER TABLE public.plano OWNER TO e_language;
+ALTER TABLE public.plano OWNER TO lucas_purkota;
 
 --
--- Name: questao_aula; Type: TABLE; Schema: public; Owner: e_language
+-- Name: questao_aula; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.questao_aula (
@@ -342,10 +359,10 @@ CREATE TABLE public.questao_aula (
 );
 
 
-ALTER TABLE public.questao_aula OWNER TO e_language;
+ALTER TABLE public.questao_aula OWNER TO lucas_purkota;
 
 --
--- Name: questao_personalizada; Type: TABLE; Schema: public; Owner: e_language
+-- Name: questao_personalizada; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.questao_personalizada (
@@ -362,10 +379,10 @@ CREATE TABLE public.questao_personalizada (
 );
 
 
-ALTER TABLE public.questao_personalizada OWNER TO e_language;
+ALTER TABLE public.questao_personalizada OWNER TO lucas_purkota;
 
 --
--- Name: resposta_questao_aula; Type: TABLE; Schema: public; Owner: e_language
+-- Name: resposta_questao_aula; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.resposta_questao_aula (
@@ -377,10 +394,10 @@ CREATE TABLE public.resposta_questao_aula (
 );
 
 
-ALTER TABLE public.resposta_questao_aula OWNER TO e_language;
+ALTER TABLE public.resposta_questao_aula OWNER TO lucas_purkota;
 
 --
--- Name: status; Type: TABLE; Schema: public; Owner: e_language
+-- Name: status; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.status (
@@ -389,10 +406,10 @@ CREATE TABLE public.status (
 );
 
 
-ALTER TABLE public.status OWNER TO e_language;
+ALTER TABLE public.status OWNER TO lucas_purkota;
 
 --
--- Name: tipo_endereco; Type: TABLE; Schema: public; Owner: e_language
+-- Name: tipo_endereco; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.tipo_endereco (
@@ -401,10 +418,10 @@ CREATE TABLE public.tipo_endereco (
 );
 
 
-ALTER TABLE public.tipo_endereco OWNER TO e_language;
+ALTER TABLE public.tipo_endereco OWNER TO lucas_purkota;
 
 --
--- Name: tipo_perfil; Type: TABLE; Schema: public; Owner: e_language
+-- Name: tipo_perfil; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.tipo_perfil (
@@ -413,10 +430,10 @@ CREATE TABLE public.tipo_perfil (
 );
 
 
-ALTER TABLE public.tipo_perfil OWNER TO e_language;
+ALTER TABLE public.tipo_perfil OWNER TO lucas_purkota;
 
 --
--- Name: tipo_questao; Type: TABLE; Schema: public; Owner: e_language
+-- Name: tipo_questao; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.tipo_questao (
@@ -425,10 +442,10 @@ CREATE TABLE public.tipo_questao (
 );
 
 
-ALTER TABLE public.tipo_questao OWNER TO e_language;
+ALTER TABLE public.tipo_questao OWNER TO lucas_purkota;
 
 --
--- Name: unidade; Type: TABLE; Schema: public; Owner: e_language
+-- Name: unidade; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.unidade (
@@ -441,10 +458,10 @@ CREATE TABLE public.unidade (
 );
 
 
-ALTER TABLE public.unidade OWNER TO e_language;
+ALTER TABLE public.unidade OWNER TO lucas_purkota;
 
 --
--- Name: usuario; Type: TABLE; Schema: public; Owner: e_language
+-- Name: usuario; Type: TABLE; Schema: public; Owner: lucas_purkota
 --
 
 CREATE TABLE public.usuario (
@@ -457,10 +474,10 @@ CREATE TABLE public.usuario (
 );
 
 
-ALTER TABLE public.usuario OWNER TO e_language;
+ALTER TABLE public.usuario OWNER TO lucas_purkota;
 
 --
--- Name: alternativa_questao_aula alternativa_questao_aula_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: alternativa_questao_aula alternativa_questao_aula_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.alternativa_questao_aula
@@ -468,7 +485,7 @@ ALTER TABLE ONLY public.alternativa_questao_aula
 
 
 --
--- Name: alternativa_questao_aula alternativa_questao_aula_udx; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: alternativa_questao_aula alternativa_questao_aula_udx; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.alternativa_questao_aula
@@ -476,7 +493,7 @@ ALTER TABLE ONLY public.alternativa_questao_aula
 
 
 --
--- Name: alternativa_questao_personalizada alternativa_questao_personalizada_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: alternativa_questao_personalizada alternativa_questao_personalizada_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.alternativa_questao_personalizada
@@ -484,7 +501,15 @@ ALTER TABLE ONLY public.alternativa_questao_personalizada
 
 
 --
--- Name: aluno_professor aluno_professor_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: aluno_plano aluno_plano_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
+--
+
+ALTER TABLE ONLY public.aluno_plano
+    ADD CONSTRAINT aluno_plano_pkey PRIMARY KEY (aluno_plano_id);
+
+
+--
+-- Name: aluno_professor aluno_professor_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.aluno_professor
@@ -492,7 +517,7 @@ ALTER TABLE ONLY public.aluno_professor
 
 
 --
--- Name: aluno_unidade aluno_unidade_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: aluno_unidade aluno_unidade_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.aluno_unidade
@@ -500,7 +525,7 @@ ALTER TABLE ONLY public.aluno_unidade
 
 
 --
--- Name: aula aula_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: aula aula_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.aula
@@ -508,7 +533,7 @@ ALTER TABLE ONLY public.aula
 
 
 --
--- Name: aula aula_udx; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: aula aula_udx; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.aula
@@ -516,7 +541,7 @@ ALTER TABLE ONLY public.aula
 
 
 --
--- Name: avaliacao avaliacao_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: avaliacao avaliacao_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.avaliacao
@@ -524,7 +549,7 @@ ALTER TABLE ONLY public.avaliacao
 
 
 --
--- Name: avaliacao_questao_aula avaliacao_questao_aula_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: avaliacao_questao_aula avaliacao_questao_aula_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.avaliacao_questao_aula
@@ -532,7 +557,7 @@ ALTER TABLE ONLY public.avaliacao_questao_aula
 
 
 --
--- Name: avaliacao_satisfacao_professor avaliacao_satisfacao_professor_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: avaliacao_satisfacao_professor avaliacao_satisfacao_professor_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.avaliacao_satisfacao_professor
@@ -540,7 +565,7 @@ ALTER TABLE ONLY public.avaliacao_satisfacao_professor
 
 
 --
--- Name: chat chat_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: chat chat_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.chat
@@ -548,7 +573,7 @@ ALTER TABLE ONLY public.chat
 
 
 --
--- Name: desafio_diario desafio_diario_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: desafio_diario desafio_diario_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.desafio_diario
@@ -556,7 +581,7 @@ ALTER TABLE ONLY public.desafio_diario
 
 
 --
--- Name: endereco endereco_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: endereco endereco_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.endereco
@@ -564,7 +589,7 @@ ALTER TABLE ONLY public.endereco
 
 
 --
--- Name: forma_pagamento forma_pagamento_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: forma_pagamento forma_pagamento_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.forma_pagamento
@@ -572,7 +597,7 @@ ALTER TABLE ONLY public.forma_pagamento
 
 
 --
--- Name: idioma idioma_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: idioma idioma_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.idioma
@@ -580,7 +605,7 @@ ALTER TABLE ONLY public.idioma
 
 
 --
--- Name: nivel_dificuldade nivel_dificuldade_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: nivel_dificuldade nivel_dificuldade_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.nivel_dificuldade
@@ -588,7 +613,7 @@ ALTER TABLE ONLY public.nivel_dificuldade
 
 
 --
--- Name: nivel_idioma nivel_idioma_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: nivel_idioma nivel_idioma_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.nivel_idioma
@@ -596,7 +621,7 @@ ALTER TABLE ONLY public.nivel_idioma
 
 
 --
--- Name: nivelamento nivelamento_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: nivelamento nivelamento_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.nivelamento
@@ -604,7 +629,7 @@ ALTER TABLE ONLY public.nivelamento
 
 
 --
--- Name: nivelamento_questao_aula nivelamento_questao_aula_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: nivelamento_questao_aula nivelamento_questao_aula_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.nivelamento_questao_aula
@@ -612,7 +637,7 @@ ALTER TABLE ONLY public.nivelamento_questao_aula
 
 
 --
--- Name: perfil_idioma perfil_idioma_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: perfil_idioma perfil_idioma_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.perfil_idioma
@@ -620,7 +645,7 @@ ALTER TABLE ONLY public.perfil_idioma
 
 
 --
--- Name: perfil perfil_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: perfil perfil_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.perfil
@@ -628,7 +653,7 @@ ALTER TABLE ONLY public.perfil
 
 
 --
--- Name: plano plano_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: plano plano_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.plano
@@ -636,7 +661,7 @@ ALTER TABLE ONLY public.plano
 
 
 --
--- Name: questao_aula questao_aula_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: questao_aula questao_aula_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.questao_aula
@@ -644,7 +669,7 @@ ALTER TABLE ONLY public.questao_aula
 
 
 --
--- Name: questao_personalizada questao_personalizada_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: questao_personalizada questao_personalizada_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.questao_personalizada
@@ -652,7 +677,7 @@ ALTER TABLE ONLY public.questao_personalizada
 
 
 --
--- Name: resposta_questao_aula resposta_questao_aula_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: resposta_questao_aula resposta_questao_aula_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.resposta_questao_aula
@@ -660,7 +685,7 @@ ALTER TABLE ONLY public.resposta_questao_aula
 
 
 --
--- Name: status status_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: status status_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.status
@@ -668,7 +693,7 @@ ALTER TABLE ONLY public.status
 
 
 --
--- Name: tipo_endereco tipo_endereco_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: tipo_endereco tipo_endereco_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.tipo_endereco
@@ -676,7 +701,7 @@ ALTER TABLE ONLY public.tipo_endereco
 
 
 --
--- Name: tipo_perfil tipo_perfil_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: tipo_perfil tipo_perfil_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.tipo_perfil
@@ -684,7 +709,7 @@ ALTER TABLE ONLY public.tipo_perfil
 
 
 --
--- Name: tipo_questao tipo_questao_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: tipo_questao tipo_questao_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.tipo_questao
@@ -692,7 +717,7 @@ ALTER TABLE ONLY public.tipo_questao
 
 
 --
--- Name: usuario uk5171l57faosmj8myawaucatdw; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: usuario uk5171l57faosmj8myawaucatdw; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.usuario
@@ -700,7 +725,7 @@ ALTER TABLE ONLY public.usuario
 
 
 --
--- Name: idioma uk5xwfmvx3k6i4kqr9r7snyciwq; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: idioma uk5xwfmvx3k6i4kqr9r7snyciwq; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.idioma
@@ -708,7 +733,7 @@ ALTER TABLE ONLY public.idioma
 
 
 --
--- Name: alternativa_questao_personalizada uk7pp4bkgtknj5t411oe1xw2ept; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: alternativa_questao_personalizada uk7pp4bkgtknj5t411oe1xw2ept; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.alternativa_questao_personalizada
@@ -716,7 +741,7 @@ ALTER TABLE ONLY public.alternativa_questao_personalizada
 
 
 --
--- Name: alternativa_questao_personalizada uk8l861723ru8y7uwg4s3mj9sfc; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: alternativa_questao_personalizada uk8l861723ru8y7uwg4s3mj9sfc; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.alternativa_questao_personalizada
@@ -724,7 +749,7 @@ ALTER TABLE ONLY public.alternativa_questao_personalizada
 
 
 --
--- Name: idioma ukdev6dxjyriha4pacjt7yh1i7; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: idioma ukdev6dxjyriha4pacjt7yh1i7; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.idioma
@@ -732,7 +757,7 @@ ALTER TABLE ONLY public.idioma
 
 
 --
--- Name: unidade unidade_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: unidade unidade_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.unidade
@@ -740,7 +765,7 @@ ALTER TABLE ONLY public.unidade
 
 
 --
--- Name: unidade unidade_udx; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: unidade unidade_udx; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.unidade
@@ -748,7 +773,7 @@ ALTER TABLE ONLY public.unidade
 
 
 --
--- Name: usuario usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: e_language
+-- Name: usuario usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.usuario
@@ -756,7 +781,7 @@ ALTER TABLE ONLY public.usuario
 
 
 --
--- Name: alternativa_questao_aula alternativa_questao_aula_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: alternativa_questao_aula alternativa_questao_aula_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.alternativa_questao_aula
@@ -764,7 +789,7 @@ ALTER TABLE ONLY public.alternativa_questao_aula
 
 
 --
--- Name: alternativa_questao_personalizada alternativa_questao_personalizada_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: alternativa_questao_personalizada alternativa_questao_personalizada_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.alternativa_questao_personalizada
@@ -772,7 +797,31 @@ ALTER TABLE ONLY public.alternativa_questao_personalizada
 
 
 --
--- Name: aluno_professor aluno_professor_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: aluno_plano aluno_palno_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
+--
+
+ALTER TABLE ONLY public.aluno_plano
+    ADD CONSTRAINT aluno_palno_fk FOREIGN KEY (aluno_id) REFERENCES public.perfil(perfil_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: aluno_plano aluno_plano_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
+--
+
+ALTER TABLE ONLY public.aluno_plano
+    ADD CONSTRAINT aluno_plano_fk2 FOREIGN KEY (plano_id) REFERENCES public.plano(plano_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: aluno_plano aluno_plano_fk3; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
+--
+
+ALTER TABLE ONLY public.aluno_plano
+    ADD CONSTRAINT aluno_plano_fk3 FOREIGN KEY (forma_pagamento_id) REFERENCES public.forma_pagamento(forma_pagamento_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: aluno_professor aluno_professor_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.aluno_professor
@@ -780,7 +829,7 @@ ALTER TABLE ONLY public.aluno_professor
 
 
 --
--- Name: aluno_unidade aluno_unidade_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: aluno_unidade aluno_unidade_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.aluno_unidade
@@ -788,7 +837,7 @@ ALTER TABLE ONLY public.aluno_unidade
 
 
 --
--- Name: aluno_unidade aluno_unidade_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: aluno_unidade aluno_unidade_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.aluno_unidade
@@ -796,7 +845,7 @@ ALTER TABLE ONLY public.aluno_unidade
 
 
 --
--- Name: aluno_unidade aluno_unidade_fk3; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: aluno_unidade aluno_unidade_fk3; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.aluno_unidade
@@ -804,7 +853,7 @@ ALTER TABLE ONLY public.aluno_unidade
 
 
 --
--- Name: aula aula_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: aula aula_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.aula
@@ -812,7 +861,7 @@ ALTER TABLE ONLY public.aula
 
 
 --
--- Name: avaliacao avaliacao_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: avaliacao avaliacao_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.avaliacao
@@ -820,7 +869,7 @@ ALTER TABLE ONLY public.avaliacao
 
 
 --
--- Name: avaliacao avaliacao_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: avaliacao avaliacao_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.avaliacao
@@ -828,7 +877,7 @@ ALTER TABLE ONLY public.avaliacao
 
 
 --
--- Name: avaliacao_satisfacao_professor avaliacao_satisfacao_professor_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: avaliacao_satisfacao_professor avaliacao_satisfacao_professor_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.avaliacao_satisfacao_professor
@@ -836,7 +885,7 @@ ALTER TABLE ONLY public.avaliacao_satisfacao_professor
 
 
 --
--- Name: chat chat_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: chat chat_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.chat
@@ -844,7 +893,7 @@ ALTER TABLE ONLY public.chat
 
 
 --
--- Name: chat chat_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: chat chat_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.chat
@@ -852,7 +901,7 @@ ALTER TABLE ONLY public.chat
 
 
 --
--- Name: desafio_diario desafio_diario_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: desafio_diario desafio_diario_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.desafio_diario
@@ -860,7 +909,7 @@ ALTER TABLE ONLY public.desafio_diario
 
 
 --
--- Name: desafio_diario desafio_diario_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: desafio_diario desafio_diario_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.desafio_diario
@@ -868,7 +917,7 @@ ALTER TABLE ONLY public.desafio_diario
 
 
 --
--- Name: desafio_diario desafio_diario_fk3; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: desafio_diario desafio_diario_fk3; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.desafio_diario
@@ -876,7 +925,7 @@ ALTER TABLE ONLY public.desafio_diario
 
 
 --
--- Name: endereco endereco_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: endereco endereco_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.endereco
@@ -884,7 +933,7 @@ ALTER TABLE ONLY public.endereco
 
 
 --
--- Name: aluno_professor endereco_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: aluno_professor endereco_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.aluno_professor
@@ -892,7 +941,7 @@ ALTER TABLE ONLY public.aluno_professor
 
 
 --
--- Name: questao_personalizada idioma_id; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: questao_personalizada idioma_id; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.questao_personalizada
@@ -900,7 +949,7 @@ ALTER TABLE ONLY public.questao_personalizada
 
 
 --
--- Name: nivelamento nivelamento_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: nivelamento nivelamento_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.nivelamento
@@ -908,7 +957,7 @@ ALTER TABLE ONLY public.nivelamento
 
 
 --
--- Name: nivelamento nivelamento_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: nivelamento nivelamento_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.nivelamento
@@ -916,7 +965,7 @@ ALTER TABLE ONLY public.nivelamento
 
 
 --
--- Name: nivelamento nivelamento_fk3; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: nivelamento nivelamento_fk3; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.nivelamento
@@ -924,7 +973,7 @@ ALTER TABLE ONLY public.nivelamento
 
 
 --
--- Name: nivelamento_questao_aula nivelamento_questao_aula_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: nivelamento_questao_aula nivelamento_questao_aula_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.nivelamento_questao_aula
@@ -932,7 +981,7 @@ ALTER TABLE ONLY public.nivelamento_questao_aula
 
 
 --
--- Name: nivelamento_questao_aula nivelamento_questao_aula_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: nivelamento_questao_aula nivelamento_questao_aula_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.nivelamento_questao_aula
@@ -940,7 +989,7 @@ ALTER TABLE ONLY public.nivelamento_questao_aula
 
 
 --
--- Name: perfil perfil_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: perfil perfil_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.perfil
@@ -948,7 +997,7 @@ ALTER TABLE ONLY public.perfil
 
 
 --
--- Name: perfil perfil_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: perfil perfil_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.perfil
@@ -956,7 +1005,7 @@ ALTER TABLE ONLY public.perfil
 
 
 --
--- Name: perfil_idioma perfil_idioma_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: perfil_idioma perfil_idioma_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.perfil_idioma
@@ -964,7 +1013,7 @@ ALTER TABLE ONLY public.perfil_idioma
 
 
 --
--- Name: perfil_idioma perfil_idioma_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: perfil_idioma perfil_idioma_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.perfil_idioma
@@ -972,15 +1021,7 @@ ALTER TABLE ONLY public.perfil_idioma
 
 
 --
--- Name: plano plano_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
---
-
-ALTER TABLE ONLY public.plano
-    ADD CONSTRAINT plano_fk FOREIGN KEY (forma_pagamento_id) REFERENCES public.forma_pagamento(forma_pagamento_id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: perfil_idioma qperfil_idioma_fk3; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: perfil_idioma qperfil_idioma_fk3; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.perfil_idioma
@@ -988,7 +1029,7 @@ ALTER TABLE ONLY public.perfil_idioma
 
 
 --
--- Name: questao_aula questao_aula_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: questao_aula questao_aula_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.questao_aula
@@ -996,7 +1037,7 @@ ALTER TABLE ONLY public.questao_aula
 
 
 --
--- Name: avaliacao_questao_aula questao_aula_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: avaliacao_questao_aula questao_aula_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.avaliacao_questao_aula
@@ -1004,7 +1045,7 @@ ALTER TABLE ONLY public.avaliacao_questao_aula
 
 
 --
--- Name: questao_aula questao_aula_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: questao_aula questao_aula_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.questao_aula
@@ -1012,7 +1053,7 @@ ALTER TABLE ONLY public.questao_aula
 
 
 --
--- Name: questao_personalizada questao_personalizada_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: questao_personalizada questao_personalizada_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.questao_personalizada
@@ -1020,7 +1061,7 @@ ALTER TABLE ONLY public.questao_personalizada
 
 
 --
--- Name: questao_personalizada questao_personalizada_fk3; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: questao_personalizada questao_personalizada_fk3; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.questao_personalizada
@@ -1028,7 +1069,7 @@ ALTER TABLE ONLY public.questao_personalizada
 
 
 --
--- Name: questao_personalizada questao_personalizada_fk4; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: questao_personalizada questao_personalizada_fk4; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.questao_personalizada
@@ -1036,7 +1077,7 @@ ALTER TABLE ONLY public.questao_personalizada
 
 
 --
--- Name: questao_personalizada questao_personalizada_fk5; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: questao_personalizada questao_personalizada_fk5; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.questao_personalizada
@@ -1044,7 +1085,7 @@ ALTER TABLE ONLY public.questao_personalizada
 
 
 --
--- Name: resposta_questao_aula resposta_questao_aula_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: resposta_questao_aula resposta_questao_aula_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.resposta_questao_aula
@@ -1052,7 +1093,7 @@ ALTER TABLE ONLY public.resposta_questao_aula
 
 
 --
--- Name: resposta_questao_aula resposta_questao_aula_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: resposta_questao_aula resposta_questao_aula_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.resposta_questao_aula
@@ -1060,7 +1101,7 @@ ALTER TABLE ONLY public.resposta_questao_aula
 
 
 --
--- Name: unidade unidade_fk; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: unidade unidade_fk; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.unidade
@@ -1068,7 +1109,7 @@ ALTER TABLE ONLY public.unidade
 
 
 --
--- Name: unidade unidade_fk2; Type: FK CONSTRAINT; Schema: public; Owner: e_language
+-- Name: unidade unidade_fk2; Type: FK CONSTRAINT; Schema: public; Owner: lucas_purkota
 --
 
 ALTER TABLE ONLY public.unidade
