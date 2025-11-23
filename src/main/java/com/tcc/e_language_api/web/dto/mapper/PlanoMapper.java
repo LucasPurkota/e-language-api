@@ -1,12 +1,7 @@
 package com.tcc.e_language_api.web.dto.mapper;
 
-import com.tcc.e_language_api.entity.AlunoProfessor;
-import com.tcc.e_language_api.entity.FormaPagamento;
-import com.tcc.e_language_api.entity.Perfil;
 import com.tcc.e_language_api.entity.Plano;
-import com.tcc.e_language_api.web.dto.AlunoProfessorDto;
 import com.tcc.e_language_api.web.dto.PlanoDto;
-import com.tcc.e_language_api.web.dto.perfil.response.PerfilResponse;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
@@ -21,7 +16,7 @@ public class PlanoMapper {
 
     public static PlanoDto toDto(Plano plano){
         PlanoDto dto = new PlanoDto();
-        dto.setPalnoId(plano.getPlanoId());
+        dto.setPlanoId(plano.getPlanoId());
         dto.setDescricao(plano.getDescricao());
         dto.setTitulo(plano.getTitulo());
         return dto;
