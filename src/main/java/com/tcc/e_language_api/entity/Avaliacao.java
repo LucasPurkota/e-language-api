@@ -19,7 +19,7 @@ public class Avaliacao {
     @GeneratedValue(generator = "uuid_generate_v4()")
     @Column(name = "avaliacao_id", nullable = false, unique = true)
     private UUID avaliacaoId;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "aluno_unidade_id", nullable = false,
             foreignKey = @ForeignKey(name = "avaliacao_fk",
                     foreignKeyDefinition = "FOREIGN KEY (aluno_unidade_id) REFERENCES aluno_unidade (aluno_unidade_id) " +

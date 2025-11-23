@@ -17,7 +17,7 @@ import java.util.UUID;
 public class AvaliacaoService {
     private final AvaliacaoRepository avaliacaoRepository;
     private final QuestaoAulaRepository questaoAulaRepository;
-    private final AlunoUnidadeRepository alunoUnidadeRepository;
+    private final AlunoUnidadeService alunoUnidadeService;
     private final PerfilService perfilService;
     private final AvaliacaoQuestaoAulaRepository avaliacaoQuestaoAulaRepository;
     private final PerfilIdiomaService perfilIdiomaService;
@@ -25,8 +25,7 @@ public class AvaliacaoService {
     @Transactional
     public void create(UUID unidadeId, String usuario) {
         Perfil aluno = perfilService.getByUsuarioAndTipoPerfil("Aluno", usuario);
-        AlunoUnidade alunoUnidade = alunoUnidadeRepository.findByAlunoAndUnidade(aluno.getPerfilId(), unidadeId)
-                .orElseThrow(() -> new EntityNotFoundException("Aluno unidade não encontrado"));
+        AlunoUnidade alunoUnidade = alunoUnidadeService.getByAlunoAndUnidade(aluno.getPerfilId(), unidadeId);
 
         List<QuestaoAula> questoes = questaoAulaRepository.findTenQuestionsByUnidade(alunoUnidade.getUnidade().getUnidadeId());
 
@@ -55,8 +54,7 @@ public class AvaliacaoService {
     public List<Avaliacao> getByUnidade(UUID unidadeId, String usuario) {
         Perfil aluno = perfilService.getByUsuarioAndTipoPerfil("Aluno", usuario);
 
-        AlunoUnidade alunoUnidade = alunoUnidadeRepository.findByAlunoAndUnidade(aluno.getPerfilId(), unidadeId)
-                .orElseThrow(() -> new EntityNotFoundException("Aluno unidade não encontrado"));
+        AlunoUnidade alunoUnidade = alunoUnidadeService.getByAlunoAndUnidade(aluno.getPerfilId(), unidadeId);
 
         return avaliacaoRepository.findByAlunoUnidadeAlunoUnidadeId(alunoUnidade.getAlunoUnidadeId());
     }
@@ -65,8 +63,7 @@ public class AvaliacaoService {
     public Avaliacao getPendente(UUID unidadeId, String usuario) {
         Perfil aluno = perfilService.getByUsuarioAndTipoPerfil("Aluno", usuario);
 
-        AlunoUnidade alunoUnidade = alunoUnidadeRepository.findByAlunoAndUnidade(aluno.getPerfilId(), unidadeId)
-                .orElseThrow(() -> new EntityNotFoundException("Aluno unidade não encontrado"));
+        AlunoUnidade alunoUnidade = alunoUnidadeService.getByAlunoAndUnidade(aluno.getPerfilId(), unidadeId);
 
         return avaliacaoRepository.findPendente(alunoUnidade.getAlunoUnidadeId())
                 .orElseThrow(() -> new EntityNotFoundException("Nenhuma avaliação pendente encontrada"));
@@ -78,8 +75,7 @@ public class AvaliacaoService {
         Perfil aluno = perfilService.getByUsuarioAndTipoPerfil("Aluno", usuario);
         Avaliacao avaliacao = getById(avaliacaoId);
 
-        AlunoUnidade alunoUnidade = alunoUnidadeRepository.findByAlunoAndUnidade(aluno.getPerfilId(), unidadeId)
-                .orElseThrow(() -> new EntityNotFoundException("Aluno unidade não encontrado"));
+        AlunoUnidade alunoUnidade = alunoUnidadeService.getByAlunoAndUnidade(aluno.getPerfilId(), unidadeId);
 
         Double pontos = 0.0;
         int qtdAcertos = 0;

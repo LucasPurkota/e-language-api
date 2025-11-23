@@ -21,6 +21,6 @@ public interface AvaliacaoRepository extends JpaRepository<Avaliacao, UUID> {
     Optional<Avaliacao> findPendente(@Param("aluno_unidade_id") UUID alunoUnidadeId);
 
     // Query nativa para testar
-    @Query(value = "SELECT * FROM avaliacao WHERE avaliacao_id = :id", nativeQuery = true)
+    @Query(value = "SELECT avaliacao.* FROM avaliacao WHERE avaliacao_id = :id", nativeQuery = true)
     Optional<Avaliacao> findByIdNative(@Param("id") UUID id);
 }
