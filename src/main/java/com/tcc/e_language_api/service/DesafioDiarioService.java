@@ -26,7 +26,8 @@ public class DesafioDiarioService {
     public void create (UUID perfilIdiomaId) {
         PerfilIdioma perfilIdioma = perfilIdiomaService.getById(perfilIdiomaId);
 
-        List<QuestaoAula> questoes = questaoAulaRepository.findFiveQuestionsByNivelIdioma(perfilIdioma.getNivelIdioma().getNivelIdiomaId());
+        List<QuestaoAula> questoes = questaoAulaRepository.findFiveQuestionsByNivelIdioma(perfilIdioma.getNivelIdioma().getNivelIdiomaId(),
+                perfilIdioma.getIdioma().getIdiomaId());
 
         for (QuestaoAula questaoAula : questoes) {
             DesafioDiario desafio = new DesafioDiario();

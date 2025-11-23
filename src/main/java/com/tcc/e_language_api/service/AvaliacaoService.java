@@ -73,6 +73,7 @@ public class AvaliacaoService {
     @Transactional
     public List<AvaliacaoQuestaoAula> corrigir(UUID avaliacaoId, UUID unidadeId, String usuario, List<AvaliacaoQuestaoAulaDto> respostas) {
         Perfil aluno = perfilService.getByUsuarioAndTipoPerfil("Aluno", usuario);
+
         Avaliacao avaliacao = getPendente(unidadeId, usuario);
 
         AlunoUnidade alunoUnidade = alunoUnidadeService.getByAlunoAndUnidade(aluno.getPerfilId(), unidadeId);
@@ -80,11 +81,16 @@ public class AvaliacaoService {
         Double pontos = 0.0;
         int qtdAcertos = 0;
         List<AvaliacaoQuestaoAula> avaliacaoQuestaoAulaList = new ArrayList<>();
+
         for (AvaliacaoQuestaoAulaDto dto : respostas) {
-            AvaliacaoQuestaoAula questao = avaliacaoQuestaoAulaRepository.findById(dto.getAvaliacaoQuestaoAulaId())
-                    .orElseThrow(() -> new RuntimeException("Avaliacao questao aula não encontrado" + dto.getAvaliacaoQuestaoAulaId()));
+            AvaliacaoQuestaoAula questao = avaliacaoQuestaoAulaRepository
+                    .findById(dto.getAvaliacaoQuestaoAulaId())
+                    .orElseThrow(() -> new RuntimeException(
+                            String.format("AvaliacaoQuestaoAula não encontrada. ID: %s", dto.getAvaliacaoQuestaoAulaId())
+                    ));
 
             questao.setResposta(dto.getResposta());
+
             if (dto.getResposta().equals(questao.getQuestaoAula().getGabarito())) {
                 qtdAcertos ++;
                 pontos += 2;
