@@ -32,7 +32,7 @@ public class AlternativaQuestaoAulaController {
             alternativaQuestaoAulaService.create(AlternativaQuestaoAulaMapper.toEntity(dto), userDetails.getRole()) ;
             return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorMessage(request, HttpStatus.CREATED, "Alternativa criada com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
@@ -42,7 +42,7 @@ public class AlternativaQuestaoAulaController {
             alternativaQuestaoAulaService.update(id, dto, userDetails.getRole()); ;
             return ResponseEntity.status(HttpStatus.OK).body(new ErrorMessage(request, HttpStatus.OK, "Alternativa alterada com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
@@ -52,7 +52,7 @@ public class AlternativaQuestaoAulaController {
             alternativaQuestaoAulaService.delete(id, userDetails.getRole()); ;
             return ResponseEntity.status(HttpStatus.OK).body(new ErrorMessage(request, HttpStatus.CREATED, "Alternativa deletada com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
@@ -62,7 +62,7 @@ public class AlternativaQuestaoAulaController {
             AlternativaQuestaoAula alternativaQuestaoAula = alternativaQuestaoAulaService.getById(id); ;
             return ResponseEntity.status(HttpStatus.OK).body(AlternativaQuestaoAulaMapper.toDto(alternativaQuestaoAula));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
@@ -72,17 +72,17 @@ public class AlternativaQuestaoAulaController {
             List<AlternativaQuestaoAula> alternativaQuestaoAula = alternativaQuestaoAulaService.getByQuestao(questaoId); ;
             return ResponseEntity.status(HttpStatus.OK).body(AlternativaQuestaoAulaMapper.toListDto(alternativaQuestaoAula));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
     @GetMapping
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> getAll(HttpServletRequest request) {
         try{
             List<AlternativaQuestaoAula> alternativaQuestaoAula = alternativaQuestaoAulaService.getAll();
             return ResponseEntity.status(HttpStatus.OK).body(AlternativaQuestaoAulaMapper.toListDto(alternativaQuestaoAula));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 }

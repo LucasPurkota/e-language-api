@@ -8,7 +8,9 @@ import com.tcc.e_language_api.web.docs.AlunoProfessorApiDocs;
 import com.tcc.e_language_api.web.dto.AlunoProfessorDto;
 import com.tcc.e_language_api.web.dto.mapper.AlternativaQuestaoAulaMapper;
 import com.tcc.e_language_api.web.dto.mapper.AlunoProfessorMapper;
+import com.tcc.e_language_api.web.exception.ErrorMessage;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,42 +29,42 @@ public class AlunoProfessorController {
 
     @PostMapping
     @AlunoProfessorApiDocs.Create
-    public ResponseEntity<String> vincularAoProfessor(@RequestBody AlunoProfessorDto dto, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> vincularAoProfessor(@RequestBody AlunoProfessorDto dto, HttpServletRequest request) {
         try{
             alunoProfessorService.create(AlunoProfessorMapper.toEntity(dto)) ;
-            return ResponseEntity.status(HttpStatus.CREATED).body("Aluno vinculado a um professor!");
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR, "Aluno vinculado a um professor!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable UUID id) {
+    public ResponseEntity<?> delete(@PathVariable UUID id, HttpServletRequest request) {
         try{
             alunoProfessorService.delete(id); ;
-            return ResponseEntity.status(HttpStatus.CREATED).body("vinculo excluido com sucesso!");
+            return ResponseEntity.status(HttpStatus.OK).body(new ErrorMessage(request, HttpStatus.OK, "vinculo excluido com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable UUID id) {
+    public ResponseEntity<?> getById(@PathVariable UUID id, HttpServletRequest request) {
         try{
             AlunoProfessor alunoProfessor = alunoProfessorService.getById(id); ;
-            return ResponseEntity.status(HttpStatus.CREATED).body(AlunoProfessorMapper.toDto(alunoProfessor));
+            return ResponseEntity.status(HttpStatus.OK).body(AlunoProfessorMapper.toDto(alunoProfessor));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
     @GetMapping
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> getAll(HttpServletRequest request) {
         try{
             List<AlunoProfessor> alunoProfessor = alunoProfessorService.getAll(); ;
-            return ResponseEntity.status(HttpStatus.CREATED).body(AlunoProfessorMapper.toListDto(alunoProfessor));
+            return ResponseEntity.status(HttpStatus.OK).body(AlunoProfessorMapper.toListDto(alunoProfessor));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 }

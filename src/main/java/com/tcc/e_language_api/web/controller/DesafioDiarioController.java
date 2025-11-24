@@ -25,7 +25,7 @@ public class DesafioDiarioController {
     private final DesafioDiarioService desafioDiarioService;
 
     @PostMapping("/{perfilIdiomaId}/perfil-idioma")
-    public ResponseEntity<?> update(@PathVariable UUID perfilIdiomaId, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request){
+    public ResponseEntity<?> getDesafios(@PathVariable UUID perfilIdiomaId, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request){
         try {
             List<DesafioDiario> desafios = desafioDiarioService.getDesafioDoDia(perfilIdiomaId);
             return ResponseEntity.status(HttpStatus.OK).body(DesafioDiarioMapper.toListDto(desafios));

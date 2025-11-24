@@ -1,10 +1,7 @@
 package com.tcc.e_language_api.service;
 
-import com.tcc.e_language_api.entity.AlunoUnidade;
-import com.tcc.e_language_api.entity.Perfil;
-import com.tcc.e_language_api.entity.PerfilIdioma;
-import com.tcc.e_language_api.entity.Unidade;
-import com.tcc.e_language_api.entity.Status;
+import com.tcc.e_language_api.entity.*;
+import com.tcc.e_language_api.entity.AlunoUnidadeAula;
 import com.tcc.e_language_api.repository.PerfilIdiomaRepository;
 import com.tcc.e_language_api.repository.PerfilRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +18,8 @@ public class PerfilIdiomaService {
     private final PerfilService perfilService;
     private final UnidadeService unidadeService;
     private final AlunoUnidadeService alunoUnidadeService;
+    private final AlunoUnidadeAulaService alunoUnidadeAulaService;
+    private final AulaService aulaService;
 
     @Transactional
     public void create(PerfilIdioma perfilIdioma){
@@ -34,9 +33,31 @@ public class PerfilIdiomaService {
                 alunoUnidade.setAluno(perfil);
 
                 Status statusUnidade = new Status();
-                statusUnidade.setStatusId(1);
+                if (unidade.getNumero() == 1) {
+                    statusUnidade.setStatusId(2);
+                }else {
+                    statusUnidade.setStatusId(1);
+                }
+
                 alunoUnidade.setStatus(statusUnidade);
                 alunoUnidadeService.create(alunoUnidade);
+
+                List<Aula> aulas = aulaService.getByUnidade(unidade.getUnidadeId());
+                for (Aula aula : aulas) {
+                    AlunoUnidadeAula alunoUnidadeAula = new AlunoUnidadeAula();
+
+                    alunoUnidadeAula.setAula(aula);
+                    alunoUnidadeAula.setAlunoUnidade(alunoUnidade);
+                    Status statusAula = new Status();
+                    if ((unidade.getNumero() == 1) && (aula.getNumero() == 1)) {
+                        statusAula.setStatusId(2);
+                    }else {
+                        statusAula.setStatusId(1);
+                    }
+                    alunoUnidadeAula.setStatus(statusAula);
+
+                    alunoUnidadeAulaService.create(alunoUnidadeAula);
+                }
             }
         }
         perfilIdioma.setPontosRanking(0.0);

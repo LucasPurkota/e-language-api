@@ -38,7 +38,7 @@ public class ChatController {
     public ResponseEntity<?> update(@PathVariable UUID alunoProfessorId, HttpServletRequest request){
         try {
             List<Chat> chats = chatService.getByAlunoProfessor(alunoProfessorId);
-            return ResponseEntity.status(HttpStatus.OK).body( ChatMapper.toListDto(chats));
+            return ResponseEntity.status(HttpStatus.OK).body(ChatMapper.toListDto(chats));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
         }

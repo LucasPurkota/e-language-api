@@ -16,4 +16,15 @@ public interface AlunoUnidadeRepository extends JpaRepository<AlunoUnidade, UUID
             "WHERE au.aluno_id = :alunoId AND au.unidade_id = :unidadeId;",
             nativeQuery = true)
     Optional<AlunoUnidade> findByAlunoAndUnidade(@Param("alunoId") UUID alunoId, @Param("unidadeId") UUID unidadeId);
+
+    @Query(value = "SELECT au.* FROM aluno_unidade au " +
+            "LEFT JOIN unidade u ON u.unidade_id = au.unidade_id " +
+            "WHERE u.idioma_id = :idiomaId AND u.numero = :numero;",
+            nativeQuery = true)
+    Optional<AlunoUnidade> findNextUnidade(@Param("idiomaId") UUID idiomaId, @Param("numero") int numero);
+
+    @Query(value = "SELECT au.* FROM aluno_unidade au " +
+            "WHERE au.aluno_id = :alunoId;",
+            nativeQuery = true)
+    List<AlunoUnidade> findByAluno(@Param("alunoId") UUID alunoId);
 }

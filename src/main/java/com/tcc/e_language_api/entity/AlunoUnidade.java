@@ -18,7 +18,7 @@ public class AlunoUnidade {
     @ManyToOne
     @JoinColumn(name = "aluno_id", nullable = false,
             foreignKey = @ForeignKey(name = "aluno_unidade_fk",
-                    foreignKeyDefinition = "FOREIGN KEY (aluno_id ) REFERENCES perfil (perfil_id) " +
+                    foreignKeyDefinition = "FOREIGN KEY (aluno_id) REFERENCES perfil (perfil_id) " +
                             "ON DELETE CASCADE ON UPDATE CASCADE"
             ))
     private Perfil aluno;

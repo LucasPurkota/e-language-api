@@ -15,9 +15,17 @@ public interface PerfilRepository extends JpaRepository<Perfil, UUID> {
     List<Perfil> findByUsuario_UsuarioId(UUID usuarioId);
 
     @Query(value = "SELECT perfil.* FROM perfil " +
-            "WHERE perfil.tipo_perfil_id = :tipoPerfilId",
+            "WHERE perfil.tipo_perfil_id = 1;",
             nativeQuery = true)
-    List<Perfil> findByTipoPerfil_PerfilId(@Param("tipoPerfilId") int tipoPerfilId);
+    List<Perfil> findAluno();
+
+    @Query(value = "SELECT perfil.* FROM perfil " +
+            "LEFT JOIN perfil_idioma pi ON  pi.perfil_id = perfil.perfil_id " +
+            "WHERE perfil.tipo_perfil_id = 2 " +
+            "AND pi.nivel_idioma_id = 3 " +
+            "AND :idioma IS NULL OR pi.idioma_id = :idioma;",
+            nativeQuery = true)
+    List<Perfil> findProfessor(@Param("idioma") UUID idioma);
 
     @Query(value = "SELECT p.* FROM perfil p " +
             "LEFT JOIN public.usuario u ON u.usuario_id = p.usuario_id " +
@@ -44,7 +52,7 @@ public interface PerfilRepository extends JpaRepository<Perfil, UUID> {
 
     @Query(value = "SELECT posicao_ranking FROM (" +
             "SELECT p.perfil_id, ROW_NUMBER() OVER (ORDER BY p.pontos_ranking DESC) as posicao_ranking " +
-            "FROM perfil p )" +
+            "FROM perfil p WHERE p.tipo_perfil_id = 1 )" +
             "AS ranked WHERE ranked.perfil_id = :perfilId",
             nativeQuery = true)
     Integer findPosicaoRanking(@Param("perfilId") UUID perfilId);

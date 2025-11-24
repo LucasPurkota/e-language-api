@@ -30,15 +30,23 @@ import lombok.extern.slf4j.Slf4j;
 public class NivelamentoController {
     private final NivelamentoService nivelamentoService;
     @PostMapping
-    public ResponseEntity<String> create(@RequestParam UUID perfilId, @RequestParam String idioma) {
-        nivelamentoService.create(idioma, perfilId);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Aluno criado com sucesso!");
+    public ResponseEntity<?> create(@RequestParam UUID perfilId, @RequestParam String idioma, HttpServletRequest request) {
+        try {
+            nivelamentoService.create(idioma, perfilId);
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorMessage(request, HttpStatus.CREATED,"Aluno criado com sucesso!"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
+        }
     }
 
     @GetMapping("/pendente")
-    public ResponseEntity<?> getNivelamentoPendente(@RequestParam UUID perfilId, @RequestParam String idioma) {
-        Nivelamento nivelamento = nivelamentoService.getNivelamentoPendente(perfilId, idioma);
-        return ResponseEntity.status(HttpStatus.OK).body(NivelamentoMapper.toDto(nivelamento));
+    public ResponseEntity<?> getNivelamentoPendente(@RequestParam UUID perfilId, @RequestParam String idioma, HttpServletRequest request) {
+        try {
+            Nivelamento nivelamento = nivelamentoService.getNivelamentoPendente(perfilId, idioma);
+            return ResponseEntity.status(HttpStatus.OK).body(NivelamentoMapper.toDto(nivelamento));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
+        }
     }
 
     @PutMapping("/{nivelamentoId}/corrigir/{perfilIdiomaId}")

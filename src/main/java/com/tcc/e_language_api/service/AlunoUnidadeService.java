@@ -42,4 +42,16 @@ public class AlunoUnidadeService {
         return alunoUnidadeRepository.findByAlunoAndUnidade(alunoId, unidadeId)
                 .orElseThrow(() -> new RuntimeException("Aluno Unidade not found"));
     }
+
+    @Transactional
+    public List<AlunoUnidade> getByAluno(UUID alunoId) {
+        return alunoUnidadeRepository.findByAluno(alunoId);
+    }
+
+
+    @Transactional
+    public AlunoUnidade getNext(UUID idiomaId, int numero) {
+        return alunoUnidadeRepository.findNextUnidade(idiomaId, numero)
+                .orElseThrow(() -> new RuntimeException("Aluno Unidade not found"));
+    }
 }
