@@ -1,6 +1,7 @@
 package com.tcc.e_language_api.web.controller;
 
 import com.tcc.e_language_api.entity.Usuario;
+import com.tcc.e_language_api.jwt.JwtUserDetails;
 import com.tcc.e_language_api.service.UsuarioService;
 import com.tcc.e_language_api.web.docs.UsuarioApiDocs;
 import com.tcc.e_language_api.web.dto.usuario.request.UsuarioCreateRequest;
@@ -8,8 +9,10 @@ import com.tcc.e_language_api.web.dto.usuario.request.UsuarioUpdateRequest;
 import com.tcc.e_language_api.web.dto.usuario.response.UsuarioResponse;
 import com.tcc.e_language_api.web.dto.usuario.response.UsuarioListResponse;
 import com.tcc.e_language_api.web.dto.mapper.UsuarioMapper;
+import com.tcc.e_language_api.web.exception.ErrorMessage;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -85,12 +89,13 @@ public class UsuarioController {
     
     @GetMapping("/me")
     @UsuarioApiDocs.GetCurrentUser
-    public ResponseEntity<UsuarioResponse> getCurrentUser() {
-        // TODO: Implementar busca do usuário logado
-        // UUID currentUserId = authService.getCurrentUserId();
-        // Usuario entity = usuarioService.getById(currentUserId);
-        // return ResponseEntity.ok(UsuarioMapper.toResponse(entity));
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
+       try {
+           Usuario entity = usuarioService.getUserLogado(userDetails.getUsername());
+           return ResponseEntity.status(HttpStatus.OK).body(UsuarioMapper.toResponse(entity));
+       } catch (Exception e) {
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+       }
     }
     
     @PatchMapping("/{id}/status")

@@ -21,6 +21,7 @@ public class QuestaoAulaService {
     private final RespostaQuestaoAulaRepository respostaQuestaoAulaRepository;
     private final PerfilService perfilService;
     private final AlunoUnidadeService alunoUnidadeService;
+    private final AlunoUnidadeAulaService alunoUnidadeAulaService;
     private final UnidadeService unidadeService;
     private final PerfilIdiomaService perfilIdiomaService;
 

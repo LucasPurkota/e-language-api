@@ -31,6 +31,8 @@ public class AvaliacaoQuestaoAula {
                             "ON DELETE CASCADE ON UPDATE CASCADE"
             ))
     private QuestaoAula questaoAula;
-    @Column(name = "resposta", nullable = false)
+    @Column(name = "resposta")
     private String resposta;
+    @Column(name = "correto")
+    private String correto;
 }

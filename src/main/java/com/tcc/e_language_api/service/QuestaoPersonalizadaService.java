@@ -29,7 +29,7 @@ public class QuestaoPersonalizadaService {
 
     @Transactional
     public void update(UUID questaoId, QuestaoPersonalizadaDto dto, List<String> tipoPerfil) {
-        if (!tipoPerfil.contains("Admin")) {
+        if (!tipoPerfil.contains("Professor")) {
             throw new RuntimeException("Usario não contem permisão para essa tarefa");
         }
 
@@ -49,7 +49,7 @@ public class QuestaoPersonalizadaService {
 
     @Transactional
     public void delete(UUID questaoId, List<String> tipoPerfil) {
-        if (!tipoPerfil.contains("Admin")) {
+        if (!tipoPerfil.contains("Professor")) {
             throw new RuntimeException("Usario não contem permisão para essa tarefa");
         }
 

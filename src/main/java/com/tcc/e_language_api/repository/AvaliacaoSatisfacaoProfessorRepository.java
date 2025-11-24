@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Repository
 public interface AvaliacaoSatisfacaoProfessorRepository extends JpaRepository<AvaliacaoSatisfacaoProfessor, UUID> {
-    @Query(value = "SELECT asp.* FROM avaliacao_satifacao_professor asp " +
+    @Query(value = "SELECT asp.* FROM avaliacao_satisfacao_professor asp " +
             "LEFT JOIN aluno_professor ap ON ap.aluno_professor_id = asp.aluno_professor_id " +
             "WHERE ap.professor_id = :professorId",
             nativeQuery = true)

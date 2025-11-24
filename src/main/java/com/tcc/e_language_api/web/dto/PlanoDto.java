@@ -10,8 +10,8 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class PlanoDto {
-    private UUID palnoId;
+    private UUID planoId;
     private String titulo;
     private String descricao;
-    private int formaPagamentoId;
+    private double valor;
 }

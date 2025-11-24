@@ -16,4 +16,6 @@ public class UnidadeDto {
     private int numero;
     private String titulo;
     private String conteudo;
+    private int StatusId;
+    private String status;
 }

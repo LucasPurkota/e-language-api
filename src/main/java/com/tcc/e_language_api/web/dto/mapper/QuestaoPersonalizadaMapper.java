@@ -55,8 +55,9 @@ public class QuestaoPersonalizadaMapper {
         dto.setGabarito(questaoPersonalizada.getGabarito());
         dto.setStatus(questaoPersonalizada.getStatus().getDescricao());
         dto.setStatusId(questaoPersonalizada.getStatus().getStatusId());
+        dto.setResposta(questaoPersonalizada.getResposta());
 
-        if (questaoPersonalizada.getCorreto().equals("S")){
+        if ((dto.getCorreto() == null) || (questaoPersonalizada.getCorreto().equals("S"))){
             dto.setCorreto("Sim");
         }else {
             dto.setCorreto("Não");

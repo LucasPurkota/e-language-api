@@ -79,7 +79,11 @@ public class PerfilService {
     }
 
     @Transactional
-    public List<Perfil> getByTipoPerfil(int tipoPerfilId) {
-        return perfilRepository.findByTipoPerfil_PerfilId(tipoPerfilId);
+    public List<Perfil> getByTipoPerfil(int tipoPerfilId, UUID idioma) {
+        if (tipoPerfilId == 2){
+            return perfilRepository.findProfessor(idioma);
+        } else {
+            return perfilRepository.findAluno();
+        }
     }
 }

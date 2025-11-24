@@ -5,6 +5,8 @@ import com.tcc.e_language_api.jwt.JwtUserDetails;
 import com.tcc.e_language_api.service.AvaliacaoSatisfacaoProfessorService;
 import com.tcc.e_language_api.web.dto.AvaliacaoSatisfacaoProfessorDto;
 import com.tcc.e_language_api.web.dto.mapper.AvaliacaoSatisfacaoProfessorMapper;
+import com.tcc.e_language_api.web.exception.ErrorMessage;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,52 +23,52 @@ public class AvaliacaoSatisfacaoProfessorController {
     private final AvaliacaoSatisfacaoProfessorService avaliacaoSatisfacaoProfessorService;
 
     @PostMapping
-    public ResponseEntity<String> create(@RequestBody AvaliacaoSatisfacaoProfessorDto dto, @AuthenticationPrincipal JwtUserDetails userDetails) {
+    public ResponseEntity<?> create(@RequestBody AvaliacaoSatisfacaoProfessorDto dto, HttpServletRequest request) {
         try {
             avaliacaoSatisfacaoProfessorService.create(AvaliacaoSatisfacaoProfessorMapper.toEntity(dto));
-            return ResponseEntity.status(HttpStatus.CREATED).body("Avaliação satisfacao criada com sucesso!");
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorMessage(request, HttpStatus.CREATED,"Avaliação satisfacao criada com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable UUID id, @RequestBody AvaliacaoSatisfacaoProfessorDto dto) {
+    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody AvaliacaoSatisfacaoProfessorDto dto, HttpServletRequest request) {
         try {
             avaliacaoSatisfacaoProfessorService.update(id, dto);
-            return ResponseEntity.status(HttpStatus.OK).body("Avaliação satisfacao alterada com sucesso!");
+            return ResponseEntity.status(HttpStatus.OK).body(new ErrorMessage(request, HttpStatus.OK,"Avaliação satisfacao alterada com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable UUID id) {
+    public ResponseEntity<?> delete(@PathVariable UUID id, HttpServletRequest request) {
         try {
             avaliacaoSatisfacaoProfessorService.delete(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Avaliação satisfacao deletada com sucesso!");
+            return ResponseEntity.status(HttpStatus.OK).body(new ErrorMessage(request, HttpStatus.OK,"Avaliação satisfacao deletada com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable UUID id) {
+    public ResponseEntity<?> getById(@PathVariable UUID id, HttpServletRequest request) {
         try {
             AvaliacaoSatisfacaoProfessor avaliacaoSatisfacaoProfessor = avaliacaoSatisfacaoProfessorService.getById(id);
             return ResponseEntity.status(HttpStatus.OK).body(AvaliacaoSatisfacaoProfessorMapper.toDto(avaliacaoSatisfacaoProfessor));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
     @GetMapping("/{professorId}/professor")
-    public ResponseEntity<?> getByProfessor(@PathVariable UUID professorId) {
+    public ResponseEntity<?> getByProfessor(@PathVariable UUID professorId, HttpServletRequest request) {
         try {
             List<AvaliacaoSatisfacaoProfessor> avaliacaoSatisfacaoProfessor = avaliacaoSatisfacaoProfessorService.getByProfessor(professorId);
             return ResponseEntity.status(HttpStatus.OK).body(AvaliacaoSatisfacaoProfessorMapper.toListDto(avaliacaoSatisfacaoProfessor));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 }

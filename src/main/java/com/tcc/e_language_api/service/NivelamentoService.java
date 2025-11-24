@@ -116,6 +116,7 @@ public class NivelamentoService {
             nivelIdioma.setNivelIdiomaId(3);
             nivelamento.setNivelIdioma(nivelIdioma);
             perfilIdioma.setNivelIdioma(nivelIdioma);
+            perfilIdioma.setAprovado("S");
         }
 
         Status status = new Status();
@@ -125,8 +126,4 @@ public class NivelamentoService {
         return listNivelamentoQuestaoAula;
     }
 
-    //corrigir
-    //salvarresposta
-    //getbyid
-    //getbyperfil
 }

@@ -35,9 +35,9 @@ public class UnidadeController {
             unidadeService.create(UnidadeMapper.toEntity(unidadeDto), userDetails.getRole());
             return ResponseEntity.status(HttpStatus.CREATED).body(new ErrorMessage(request, HttpStatus.CREATED, "Unidade criada com sucesso!"));
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMessage(request, HttpStatus.BAD_REQUEST,e.getMessage()));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno do servidor");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
@@ -45,9 +45,9 @@ public class UnidadeController {
     public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody UnidadeDto dto, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
         try {
             unidadeService.update(id, dto, userDetails.getRole());
-            return ResponseEntity.ok(new ErrorMessage(request, HttpStatus.CREATED, "Unidade alterada com sucesso!"));
+            return ResponseEntity.ok(new ErrorMessage(request, HttpStatus.OK, "Unidade alterada com sucesso!"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
@@ -55,7 +55,7 @@ public class UnidadeController {
     public ResponseEntity<?> delete(@PathVariable UUID id, @AuthenticationPrincipal JwtUserDetails userDetails, HttpServletRequest request) {
         try {
             unidadeService.delete(id, userDetails.getRole());
-            return ResponseEntity.ok(new ErrorMessage(request, HttpStatus.CREATED, "Unidade deletada com sucesso!"));
+            return ResponseEntity.ok(new ErrorMessage(request, HttpStatus.OK, "Unidade deletada com sucesso!"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -64,20 +64,20 @@ public class UnidadeController {
     @GetMapping("/{id}")
     @UnidadeApiDocs.GetById
     @SecurityRequirement(name = "Bearer Authentication")
-    public ResponseEntity<UnidadeDto> getById(@Parameter(description = "ID da unidade") @PathVariable UUID id) {
+    public ResponseEntity<?> getById(@Parameter(description = "ID da unidade") @PathVariable UUID id, HttpServletRequest request) {
         try {
             Unidade unidade = unidadeService.getById(id);
             return ResponseEntity.ok(UnidadeMapper.toDto(unidade));
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         }
     }
 
     @GetMapping("/{idiomaId}/idioma")
     @UnidadeApiDocs.GetByIdiomaId
-    public ResponseEntity<?> getUnidadesByIdiomaId(@Parameter(description = "ID do idioma") @PathVariable UUID idiomaId) {
+    public ResponseEntity<?> getUnidadesByIdiomaId(@Parameter(description = "ID do idioma") @PathVariable UUID idiomaId, HttpServletRequest request) {
         try {
             var unidades = unidadeService.getByIdiomaId(idiomaId);
             var unidadesDto = unidades.stream()
@@ -85,7 +85,7 @@ public class UnidadeController {
                     .toList();
             return ResponseEntity.ok(unidadesDto);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno do servidor");
         }

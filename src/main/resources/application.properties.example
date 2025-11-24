@@ -1,0 +1,32 @@
+spring.application.name=e-language-api
+
+# LOCALE
+spring.mvc.locale-resolver=fixed
+spring.mvc;locale=pt_BR
+
+# POSTGRESQL Database Connection Properties
+spring.datasource.url=jdbc:postgresql://dpg-d4finmpr0fns73aanp7g-a.oregon-postgres.render.com:5432/e_language_y873?ssl=true&sslmode=require
+spring.datasource.username=e_language
+spring.datasource.password=eNLi0Q24PGvd8H98XcdWt5FtT4jRUkhF
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# JPA
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.generate-ddl=true
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
+
+spring.sql.init.mode=always
+
+spring.datasource.initialization-mode=always
+
+# Server port (opcional - padrÃ£o Ã© 8080)
+server.port=8080
+
+# SpringDoc OpenAPI (Swagger) Configuration
+springdoc.api-docs.path=/v3/api-docs
+springdoc.swagger-ui.path=/swagger-ui
+springdoc.swagger-ui.operationsSorter=method
+springdoc.swagger-ui.tagsSorter=alpha
+springdoc.swagger-ui.tryItOutEnabled=true

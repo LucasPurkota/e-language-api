@@ -75,6 +75,7 @@ public class UsuarioMapper {
         }
         
         UsuarioResponse response = mapper.map(entity, UsuarioResponse.class);
+        response.setCriadoEm(entity.getDataCriacao());
         
         // Configurar endereços com verificação defensiva para Angular
         response.setEnderecos(

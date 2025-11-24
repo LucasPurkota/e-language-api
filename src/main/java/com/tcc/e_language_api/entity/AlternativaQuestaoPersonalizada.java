@@ -23,8 +23,8 @@ public class AlternativaQuestaoPersonalizada {
                     foreignKeyDefinition = "FOREIGN KEY (questao_personalizada_id) REFERENCES questao_personalizada (questao_personalizada_id) ON DELETE CASCADE ON UPDATE CASCADE"
             ))
     private QuestaoPersonalizada questaoPersonalizada;
-    @Column(name = "alternativa", nullable = false, unique = true)
+    @Column(name = "alternativa", nullable = false)
     private String alternativa;
-    @Column(name = "descricao", nullable = false, unique = true)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 }
