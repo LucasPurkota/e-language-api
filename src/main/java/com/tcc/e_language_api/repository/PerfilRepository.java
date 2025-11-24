@@ -23,7 +23,7 @@ public interface PerfilRepository extends JpaRepository<Perfil, UUID> {
             "LEFT JOIN perfil_idioma pi ON  pi.perfil_id = perfil.perfil_id " +
             "WHERE perfil.tipo_perfil_id = 2 " +
             "AND pi.nivel_idioma_id = 3 " +
-            "AND :idioma IS NULL OR pi.idioma_id = :idioma;",
+            "AND (:idioma IS NULL OR pi.idioma_id = :idioma);",
             nativeQuery = true)
     List<Perfil> findProfessor(@Param("idioma") UUID idioma);
 
